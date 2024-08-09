@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js"
   },
   "engines": {
-    "node": "18.18.2"
+    "node": "^18.18.2"
   },
   "dependencies": {
     "@fontsource/lato": "^5.0.21",
