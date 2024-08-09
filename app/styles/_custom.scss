@@ -1,0 +1,46 @@
+// Here you can add other styles
+
+// homepage .slick-track dispay to flex
+.homepage .slick-track {
+  display: flex !important;
+  justify-content: center;
+}
+
+// homepage .slick-slide height to 300px
+.homepage .slick-slide {
+  //height: 400px !important;
+}
+
+.home-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.home-list .product-container .item-box {
+  height: 100%;
+  position: relative;
+  width: 200px !important;
+}
+
+.home-list {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.product-list {
+  padding: 10px;
+}
+
+.slick-slide {
+  padding: 10px;
+}
+
+.slick-prev, .slick-next {
+  z-index: 1;
+}
+
+.slick-prev::before, .slick-next::before {
+  color: #000;
+}
