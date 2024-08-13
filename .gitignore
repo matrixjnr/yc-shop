@@ -1,3 +1,4 @@
 # git igonre file for react application
 node_modules
 build
+.env
