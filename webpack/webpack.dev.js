@@ -69,7 +69,7 @@ const config = {
   ],
   devServer: {
     port: 7070,
-    open: true,
+    open: false,
     inline: true,
     compress: true,
     hot: true,
