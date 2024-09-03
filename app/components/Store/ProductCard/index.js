@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AddToWishList from '../AddToWishList';
+import { formatMoney } from '../../../utils';
 
 const ProductCard = ({ product, updateWishlist, authenticated }) => {
   return (
@@ -35,20 +36,20 @@ const ProductCard = ({ product, updateWishlist, authenticated }) => {
               </div>
               <div className='item-body'>
                 <div className='item-details p-3'>
-                  <h1 className='item-name'>{product.name}</h1>
+                  <h1 className='item-name text-primary'>{product.name}</h1>
                   {product.brand && Object.keys(product.brand).length > 0 && (
-                    <p className='by'>
+                    <p className='by small'>
                       By <span>{product.brand.name}</span>
                     </p>
                   )}
-                  <p className='item-desc mb-0'>{product.description}</p>
+                  {/* <p className='item-desc mb-0'>{product.description}</p> */}
                 </div>
               </div>
               <div className='d-flex flex-row justify-content-between align-items-center px-4 mb-2 item-footer'>
-                <p className='price mb-0'>KSh {product.price}</p>
+                <p className='price mb-0'>{formatMoney(product.price)}</p>
                 {product.totalReviews > 0 && (
                   <p className='mb-0'>
-                    <span className='fs-16 fw-normal mr-1'>
+                    <span className='mr-1'>
                       {parseFloat(product?.averageRating).toFixed(1)}
                     </span>
                     <span

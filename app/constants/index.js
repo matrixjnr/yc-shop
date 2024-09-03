@@ -1,4 +1,7 @@
-export const API_URL = process.env.NODE_ENV === 'production' ? process.env.API_URL : 'http://localhost:3050/api';
+export const API_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.API_URL
+    : process.env.REACT_APP_API_URL;
 
 export const SOCKET_URL =
   window.location.host.indexOf('localhost') >= 0

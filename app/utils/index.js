@@ -67,3 +67,22 @@ export const getMemoizedRandomColors = s => {
     return result;
   }
 };
+
+
+/*
+format number (money) by adding currency symbol and comma where need be e.g.
+const number = 123456;
+console.log(new Intl.NumberFormat('en-US', { style: 'currency', currency: 'EUR' }).format(number));
+// expected output: "€123,456"
+more examples for intl.NumberFormat 👇
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+*/
+
+export const formatMoney = (money, currency = 'Ksh', locale = 'en-US', style = 'currency', maximumFractionDigits = 0) => {
+  const formatter = new Intl.NumberFormat(locale, {
+    style,
+    currency,
+    maximumFractionDigits,
+  });
+  return formatter.format(money)
+}
