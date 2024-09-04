@@ -9,7 +9,6 @@ on:
 
 jobs:
   build_and_preview:
-    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,15 +19,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          
-    steps:
+
       - uses: pnpm/action-setup@v4
         with:
-          version: 6.0.2
+          version: 9.9.0
           run_install: true
       - run: pnpm build:testing
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_YCOMPUTER_92CAE }}
+          channelId: ${{ github.event_name == 'push' && 'live' || '' }}
           projectId: ycomputer-92cae
