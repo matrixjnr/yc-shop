@@ -5,11 +5,12 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.prod.js",
     "clean": "rimraf dist",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack --mode production --config webpack/webpack.prod.js",
+    "build": "pnpm clean && cross-env NODE_ENV=production webpack --mode production --config webpack/webpack.prod.js",
+    "build:testing": "pnpm clean && cross-env NODE_ENV=development webpack --mode production --config webpack/webpack.testing.js",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js"
   },
   "engines": {
-    "node": "^18.18.2"
+    "node": "^18.*"
   },
   "dependencies": {
     "@fontsource/lato": "^5.0.21",
