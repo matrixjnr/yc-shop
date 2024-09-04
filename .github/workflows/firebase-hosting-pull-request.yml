@@ -10,6 +10,11 @@ on:
 jobs:
   build_and_preview:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      
     strategy:
       matrix:
         node-version: [18.x]
