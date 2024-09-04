@@ -3,6 +3,8 @@ export const API_URL =
     ? process.env.API_URL
     : process.env.DEV_API_URL;
 
+console.log(process.env.API_URL, process.env.DEV_API_URL, API_URL)
+
 export const SOCKET_URL =
   window.location.host.indexOf('localhost') >= 0
     ? 'http://127.0.0.1:3050'
