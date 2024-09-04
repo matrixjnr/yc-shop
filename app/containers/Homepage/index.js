@@ -181,7 +181,7 @@ const mapStateToProps = (state) => {
     products: state.product.storeProducts,
     isLoading: state.product.isLoading,
     authenticated: state.authentication.authenticated,
-    brands: state.brand.storeBrands,
+    brands: state.brand.storeBrands || [],
   };
 };
 
