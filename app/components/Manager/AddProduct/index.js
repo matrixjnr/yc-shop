@@ -39,19 +39,19 @@ const AddProduct = props => {
     <div className='add-product'>
       <form onSubmit={handleSubmit} noValidate>
         <Row>
-          <Col xs='12' lg='6'>
-            <Input
-              type={'text'}
-              error={formErrors['sku']}
-              label={'Sku'}
-              name={'sku'}
-              placeholder={'Product Sku'}
-              value={productFormData.sku}
-              onInputChange={(name, value) => {
-                productChange(name, value);
-              }}
-            />
-          </Col>
+          {/*<Col xs='12' lg='6'>*/}
+          {/*  <Input*/}
+          {/*    type={'text'}*/}
+          {/*    error={formErrors['sku']}*/}
+          {/*    label={'Sku'}*/}
+          {/*    name={'sku'}*/}
+          {/*    placeholder={'Product Sku'}*/}
+          {/*    value={productFormData.sku}*/}
+          {/*    onInputChange={(name, value) => {*/}
+          {/*      productChange(name, value);*/}
+          {/*    }}*/}
+          {/*  />*/}
+          {/*</Col>*/}
           <Col xs='12' lg='6'>
             <Input
               type={'text'}
@@ -62,6 +62,21 @@ const AddProduct = props => {
               value={productFormData.name}
               onInputChange={(name, value) => {
                 productChange(name, value);
+              }}
+            />
+          </Col>
+          <Col xs='12' md='6'>
+            <SelectOption
+              disabled={user.role === ROLES.Merchant}
+              error={formErrors['brand']}
+              name={'brand'}
+              label={'Select Brand'}
+              value={
+                user.role === ROLES.Merchant ? brands[1] : productFormData.brand
+              }
+              options={brands}
+              handleSelectChange={value => {
+                productChange('brand', value);
               }}
             />
           </Col>
@@ -115,21 +130,6 @@ const AddProduct = props => {
               value={productFormData.taxable}
               handleSelectChange={value => {
                 productChange('taxable', value);
-              }}
-            />
-          </Col>
-          <Col xs='12' md='12'>
-            <SelectOption
-              disabled={user.role === ROLES.Merchant}
-              error={formErrors['brand']}
-              name={'brand'}
-              label={'Select Brand'}
-              value={
-                user.role === ROLES.Merchant ? brands[1] : productFormData.brand
-              }
-              options={brands}
-              handleSelectChange={value => {
-                productChange('brand', value);
               }}
             />
           </Col>
