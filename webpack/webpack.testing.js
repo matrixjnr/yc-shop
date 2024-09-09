@@ -14,8 +14,12 @@ const CURRENT_WORKING_DIR = process.cwd();
 const NODE_ENV = process.env.NODE_ENV;
 const API_URL = process.env.DEV_API_URL;
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 console.log("API_URL", API_URL)
 console.log("NODE_ENV", NODE_ENV)
+console.log("REACT_APP_API_URL", REACT_APP_API_URL)
+console.log("REACT_APP_API_URL_DEV", REACT_APP_API_URL_DEV)
 
 const config = {
   mode: 'production',
@@ -129,8 +133,10 @@ const config = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(NODE_ENV),
-        API_URL: JSON.stringify(API_URL),
-        DEV_API_URL: JSON.stringify(API_URL),
+        API_URL: JSON.stringify(REACT_APP_API_URL),
+        DEV_API_URL: JSON.stringify(REACT_APP_API_URL),
+        REACT_APP_API_URL: JSON.stringify(REACT_APP_API_URL),
+        REACT_APP_API_URL_DEV: JSON.stringify(REACT_APP_API_URL)
       }
     }),
     new HtmlWebpackPlugin({

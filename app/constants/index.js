@@ -1,9 +1,9 @@
 export const API_URL =
   process.env.NODE_ENV === "production"
-    ? process.env.API_URL
-    : process.env.DEV_API_URL;
+    ? process.env.REACT_APP_API_URL
+    : process.env.REACT_APP_API_URL;
 
-console.log(process.env.API_URL, process.env.DEV_API_URL, API_URL)
+console.log(process.env.API_URL, process.env.DEV_API_URL, API_URL, process.env.REACT_APP_API_URL)
 
 export const SOCKET_URL =
   window.location.host.indexOf('localhost') >= 0
