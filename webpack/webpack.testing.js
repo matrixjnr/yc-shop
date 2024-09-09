@@ -19,7 +19,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 console.log("API_URL", API_URL)
 console.log("NODE_ENV", NODE_ENV)
 console.log("REACT_APP_API_URL", REACT_APP_API_URL)
-console.log("REACT_APP_API_URL_DEV", REACT_APP_API_URL_DEV)
 
 const config = {
   mode: 'production',
