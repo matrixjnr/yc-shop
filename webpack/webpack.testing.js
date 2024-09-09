@@ -14,6 +14,9 @@ const CURRENT_WORKING_DIR = process.cwd();
 const NODE_ENV = process.env.NODE_ENV;
 const API_URL = process.env.DEV_API_URL;
 
+console.log("API_URL", API_URL)
+console.log("NODE_ENV", NODE_ENV)
+
 const config = {
   mode: 'production',
   devServer: {
