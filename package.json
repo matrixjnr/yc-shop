@@ -38,6 +38,7 @@
     "react-router-dom": "^5.3.4",
     "react-select": "^3.2.0",
     "react-share": "^4.4.1",
+    "react-simple-wysiwyg": "^3.1.2",
     "react-slick": "^0.30.2",
     "reactstrap": "^8.10.1",
     "redux": "^4.2.1",
