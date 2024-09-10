@@ -18,6 +18,7 @@
     "autosuggest-highlight": "^3.3.4",
     "axios": "^0.21.4",
     "bootstrap": "^4.6.2",
+    "connected-react-router": "^6.9.3",
     "dompurify": "^2.4.7",
     "dotenv": "^8.6.0",
     "font-awesome": "^4.7.0",
