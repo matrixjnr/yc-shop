@@ -14,6 +14,7 @@ import Input from '../../Common/Input';
 import Switch from '../../Common/Switch';
 import Button from '../../Common/Button';
 import SelectOption from '../../Common/SelectOption';
+import Editor from 'react-simple-wysiwyg';
 
 const taxableSelect = [
   { value: 1, label: 'Yes' },
@@ -88,15 +89,11 @@ const EditProduct = props => {
             />
           </Col>
           <Col xs='12' md='12'>
-            <Input
-              type={'textarea'}
-              error={formErrors['description']}
-              label={'Description'}
-              name={'description'}
-              placeholder={'Product Description'}
+            <h6>Description</h6>
+            <Editor
               value={product.description}
-              onInputChange={(name, value) => {
-                productChange(name, value);
+              onChange={e => {
+                productChange('description', e.target.value);
               }}
             />
           </Col>

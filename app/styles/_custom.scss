@@ -44,3 +44,17 @@
 .slick-prev::before, .slick-next::before {
   color: #000;
 }
+
+.rsw-ce ul {
+  list-style: disc;
+  padding-left: 2em;
+}
+
+.rsw-ce ol {
+  list-style: decimal;
+  padding-left: 2em;
+}
+
+.item-desc > div > ol {
+  margin-left: 1rem;
+}
