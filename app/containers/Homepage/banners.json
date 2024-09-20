@@ -3,12 +3,16 @@
     "imageUrl": "/images/banners/banner-3.jpg",
     "link": "",
     "title": "",
-    "content": "<p></p>\n"
+    "content": "<p></p>\n",
+    "height": "600px",
+    "width": "100%"
   },
   {
     "imageUrl": "/images/banners/banner-4.jpg",
     "link": "",
     "title": "",
-    "content": "<p></p>\n"
+    "content": "<p></p>\n",
+    "height": "600px",
+    "width": "100%"
   }
 ]

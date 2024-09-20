@@ -45,6 +45,10 @@ const initialState = {
     brand: {
       value: 0,
       label: 'No Options Selected'
+    },
+    category: {
+      value: 0,
+      label: 'No Options Selected'
     }
   },
   isLoading: false,
@@ -169,6 +173,10 @@ const productReducer = (state = initialState, action) => {
           isActive: true,
           taxable: { value: 0, label: 'No' },
           brand: {
+            value: 0,
+            label: 'No Options Selected'
+          },
+          category: {
             value: 0,
             label: 'No Options Selected'
           }

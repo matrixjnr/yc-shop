@@ -28,6 +28,7 @@ const AddProduct = props => {
     productChange,
     addProduct,
     brands,
+    categories,
     image
   } = props;
 
@@ -78,6 +79,19 @@ const AddProduct = props => {
               options={brands}
               handleSelectChange={value => {
                 productChange('brand', value);
+              }}
+            />
+          </Col>
+          <Col xs='12' md='6'>
+            <SelectOption
+              disabled={user.role === ROLES.Merchant}
+              error={formErrors['categories']}
+              name={'category'}
+              label={'Select Category'}
+              value={productFormData.category}
+              options={categories}
+              handleSelectChange={value => {
+                productChange('category', value);
               }}
             />
           </Col>

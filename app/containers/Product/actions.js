@@ -221,6 +221,8 @@ export const fetchProduct = id => {
         'fetchProduct'
       );
 
+      const categories = response.data.product.categories;
+
       response.data.product.brand = brandData[0];
 
       const product = { ...response.data.product, inventory };
@@ -247,14 +249,19 @@ export const addProduct = () => {
         price: 'required|numeric',
         taxable: 'required',
         image: 'required',
-        brand: 'required'
+        brand: 'required',
+        category: 'required'
       };
 
       const product = getState().product.productFormData;
       const user = getState().account.user;
       const brands = getState().brand.brandsSelect;
+      const categories = getState().category.categoriesSelect;
 
       const brand = unformatSelectOptions([product.brand]);
+      const category = unformatSelectOptions([product.category]);
+
+      console.log("Product: ", product);
 
       const newProduct = {
         // sku: product.sku,
@@ -271,6 +278,7 @@ export const addProduct = () => {
               ? brand
               : null
             : brands[1].value,
+        category: category,
         featured: product.featured,
         onOffer: product.onOffer,
       };
@@ -291,7 +299,8 @@ export const addProduct = () => {
         'required.price': 'Price is required.',
         'required.taxable': 'Taxable is required.',
         'required.image': 'Please upload files with jpg, jpeg, png format.',
-        'required.brand': 'Brand is required.'
+        'required.brand': 'Brand is required.',
+        'required.category': 'Category is required.'
       });
 
       if (!isValid) {
@@ -302,6 +311,8 @@ export const addProduct = () => {
         for (const key in newProduct) {
           if (newProduct.hasOwnProperty(key)) {
             if (key === 'brand' && newProduct[key] === null) {
+              continue;
+            } else if (key === 'category' && newProduct[key] === null) {
               continue;
             } else {
               formData.set(key, newProduct[key]);
@@ -347,12 +358,14 @@ export const updateProduct = () => {
         quantity: 'required|numeric',
         price: 'required|numeric',
         taxable: 'required',
-        brand: 'required'
+        brand: 'required',
+        category: 'required'
       };
 
       const product = getState().product.product;
 
       const brand = unformatSelectOptions([product.brand]);
+      const category = unformatSelectOptions(product.categories);
 
       const newProduct = {
         name: product.name,
@@ -362,7 +375,8 @@ export const updateProduct = () => {
         quantity: product.quantity,
         price: product.price,
         taxable: product.taxable,
-        brand: brand != 0 ? brand : null
+        brand: brand != 0 ? brand : null,
+        category: category,
       };
 
       const { isValid, errors } = allFieldsValidation(newProduct, rules, {
@@ -379,7 +393,8 @@ export const updateProduct = () => {
         'required.quantity': 'Quantity is required.',
         'required.price': 'Price is required.',
         'required.taxable': 'Taxable is required.',
-        'required.brand': 'Brand is required.'
+        'required.brand': 'Brand is required.',
+        'required.category': 'Category is required.'
       });
 
       if (!isValid) {

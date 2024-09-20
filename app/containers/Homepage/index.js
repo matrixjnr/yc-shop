@@ -10,6 +10,9 @@ import CarouselSlider from "../../components/Common/CarouselSlider";
 import { responsiveOneItemCarousel } from "../../components/Common/CarouselSlider/utils";
 import ProductCard from "../../components/Store/ProductCard";
 import LoadingIndicator from "../../components/Common/LoadingIndicator";
+import CarouselComponent from "../../components/Common/CategorySlider";
+import FlashSaleComponent from "../../components/Common/FlashSale";
+import FeaturedProductsComponent from "../../components/Common/FeaturedComponent";
 
 class Homepage extends React.PureComponent {
   componentDidMount() {
@@ -24,11 +27,8 @@ class Homepage extends React.PureComponent {
     // Filter the products
     const onOfferProducts = products.filter((product) => product.onOffer);
     const featuredProducts = products.filter((product) => product.featured);
-    const hpLaptops = products.filter((product) => product.brand.name === "HP");
-    // categories are optional, check it if present in product
-    const newLaptops = products.filter(
-      (product) => product.category?.name === "New Laptops"
-    );
+    const todayTopPicks = products.filter((product) => product.categories.map((category) => category.name).includes("Today"));
+    const bestSellers = products.filter((product) => product.categories.map((category) => category.name).includes("Best Seller"));
 
     console.log("onOfferProducts", onOfferProducts);
 
@@ -72,38 +72,8 @@ class Homepage extends React.PureComponent {
 
     return (
       <div className="homepage">
-        <Row className="no-gutters mx-1">
-          <Col xs="12" lg="9" className="order-lg-2">
-            <div className="home-carousel">
-              <CarouselSlider
-                swipeable={true}
-                showDots={true}
-                infinite={true}
-                autoPlay={true}
-                slides={banners}
-                autoPlaySpeed={5000}
-                responsive={responsiveOneItemCarousel}
-              >
-                {banners.map((item, index) => (
-                  <img key={index} src={item.imageUrl} />
-                ))}
-              </CarouselSlider>
-            </div>
-          </Col>
-          <Col xs="12" lg="3" className="order-lg-1">
-            <div className="h-100 shadow p-3">
-              {brands.slice(0, 10).map((brand, index) => (
-                <Link
-                  to={`/shop/brand/${brand.slug}`}
-                  className="d-block brand-link py-2 fw-bold"
-                  key={index}
-                >
-                  {brand.name}
-                </Link>
-              ))}
-            </div>
-          </Col>
-        </Row>
+        <CarouselComponent />
+        <FlashSaleComponent />
         {isLoading && <LoadingIndicator />}
         <Row className="flex-row">
           {onOfferProducts.length > 0 && (
@@ -124,25 +94,14 @@ class Homepage extends React.PureComponent {
           )}
           {featuredProducts.length > 0 && (
             <Col xs="12" className="mb-3 mt-5">
-              <h2>Featured Products</h2>
-              <Slider {...sliderSettings}>
-                {featuredProducts.map((item, index) => (
-                  <div key={index} className="product-list home-list">
-                    <ProductCard
-                      product={item}
-                      updateWishlist={updateWishlist}
-                      authenticated={authenticated}
-                    />
-                  </div>
-                ))}
-              </Slider>
+              <FeaturedProductsComponent products={featuredProducts} />
             </Col>
           )}
-          {hpLaptops.length > 0 && (
+          {todayTopPicks.length > 0 && (
             <Col xs="12" className="mb-3 mt-5">
               <h2>HP Laptops</h2>
               <Slider {...sliderSettings}>
-                {hpLaptops.map((item, index) => (
+                {todayTopPicks.map((item, index) => (
                   <div key={index} className="product-list home-list">
                     <ProductCard
                       product={item}
@@ -154,11 +113,11 @@ class Homepage extends React.PureComponent {
               </Slider>
             </Col>
           )}
-          {newLaptops.length > 0 && (
-            <Col xs="12" className="mb-3">
-              <h2>New Laptops</h2>
+          {bestSellers.length > 0 && (
+            <Col xs="12" className="mb-3 mt-5">
+              <h2>HP Laptops</h2>
               <Slider {...sliderSettings}>
-                {newLaptops.map((item, index) => (
+                {todayTopPicks.map((item, index) => (
                   <div key={index} className="product-list home-list">
                     <ProductCard
                       product={item}

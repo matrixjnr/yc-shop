@@ -6,10 +6,10 @@
 
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {Row, Col} from 'reactstrap';
 
-import { ROLES } from '../../../constants';
+import {ROLES} from '../../../constants';
 import Input from '../../Common/Input';
 import Switch from '../../Common/Switch';
 import Button from '../../Common/Button';
@@ -17,8 +17,8 @@ import SelectOption from '../../Common/SelectOption';
 import Editor from 'react-simple-wysiwyg';
 
 const taxableSelect = [
-  { value: 1, label: 'Yes' },
-  { value: 0, label: 'No' }
+  {value: 1, label: 'Yes'},
+  {value: 0, label: 'No'}
 ];
 
 const EditProduct = props => {
@@ -28,6 +28,7 @@ const EditProduct = props => {
     productChange,
     formErrors,
     brands,
+    categories,
     updateProduct,
     deleteProduct,
     activateProduct
@@ -139,18 +140,33 @@ const EditProduct = props => {
             />
           </Col>
           {user.role === ROLES.Admin && (
-            <Col xs='12' md='12'>
-              <SelectOption
-                error={formErrors['brand']}
-                label={'Select Brand'}
-                multi={false}
-                value={product.brand}
-                options={brands}
-                handleSelectChange={value => {
-                  productChange('brand', value);
-                }}
-              />
-            </Col>
+            <>
+              <Col xs='12' md='12'>
+                <SelectOption
+                  error={formErrors['brand']}
+                  label={'Select Brand'}
+                  multi={false}
+                  value={product.brand}
+                  options={brands}
+                  handleSelectChange={value => {
+                    productChange('brand', value);
+                  }}
+                />
+              </Col>
+              <Col xs='12' md='12'>
+                <SelectOption
+                  error={formErrors['categories']}
+                  label={'Select Category: '
+                    + product.categories.map(category => category.name).join(', ')}
+                  multi={true}
+                  // defaultValue={product.categories.map(category => category.name)}
+                  options={categories}
+                  handleSelectChange={value => {
+                    productChange('category', value);
+                  }}
+                />
+              </Col>
+            </>
           )}
           <Col xs='12' md='12' className='mt-3 mb-2'>
             <Switch
@@ -165,7 +181,7 @@ const EditProduct = props => {
             />
           </Col>
         </Row>
-        <hr />
+        <hr/>
         <div className='d-flex flex-column flex-md-row'>
           <Button
             type='submit'

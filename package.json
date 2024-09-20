@@ -16,6 +16,7 @@
     "@fontsource/montserrat": "^5.0.18",
     "@fontsource/outfit": "^5.1.0",
     "@fontsource/poppins": "^4.5.10",
+    "@fontsource/public-sans": "^5.1.0",
     "autosuggest-highlight": "^3.3.4",
     "axios": "^0.21.4",
     "bootstrap": "^4.6.2",
