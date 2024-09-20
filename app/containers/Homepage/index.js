@@ -25,10 +25,20 @@ class Homepage extends React.PureComponent {
       this.props;
 
     // Filter the products
+    // Safely filter the products by checking if categories exist
     const onOfferProducts = products.filter((product) => product.onOffer);
     const featuredProducts = products.filter((product) => product.featured);
-    const todayTopPicks = products.filter((product) => product.categories.map((category) => category.name).includes("Today"));
-    const bestSellers = products.filter((product) => product.categories.map((category) => category.name).includes("Best Seller"));
+    const todayTopPicks = products.filter(
+      (product) => product.categories && product.categories.some((category) => category.name === "Today")
+    );
+    const bestSellers = products.filter(
+      (product) => product.categories && product.categories.some((category) => category.name === "Best Seller")
+    );
+
+    // const onOfferProducts = [];
+    // const featuredProducts = [];
+    // const todayTopPicks = [];
+    // const bestSellers = [];
 
     console.log("onOfferProducts", onOfferProducts);
 
