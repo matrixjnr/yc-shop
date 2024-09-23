@@ -1,4 +1,7 @@
 // Here you can add other styles
+.body {
+  font-family: 'Public Sans', sans-serif;
+}
 
 // homepage .slick-track dispay to flex
 .homepage .slick-track {
@@ -42,7 +45,7 @@
 }
 
 .slick-prev::before, .slick-next::before {
-  color: #000;
+  color: grey;
 }
 
 .rsw-ce ul {
@@ -320,4 +323,112 @@
 //.slick-track {
 //  margin: 0 auto;
 //}
+
+/* Container styles */
+
+.img-fit-deals {
+  max-height: 100%;
+  object-fit: cover;
+  height: 80px;
+  width: 80px;
+}
+
+.todays-deal-container {
+  background-color: #A3065F;
+}
+
+/* Image styles */
+.img-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  & {
+    justify-content: center;
+  }
+  align-items: center;
+}
+
+.product-img {
+  width: 100%;
+  height: auto;
+}
+
+/* Product card styling */
+.product-card {
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+}
+
+.product-price {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Carousel adjustments */
+.slick-slide {
+  margin: 0 10px;
+}
+
+.slick-track {
+  display: flex;
+  align-items: center;
+}
+
+.slick-prev,
+.slick-next {
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .slick-slide {
+    margin: 0 5px;
+  }
+
+  .product-price {
+    font-size: 14px;
+  }
+
+  .img-container {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.carousel-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.text-white {
+  color: white;
+}
+
+.hov-scale-img:hover img {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
 

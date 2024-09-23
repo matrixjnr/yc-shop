@@ -359,13 +359,17 @@ export const updateProduct = () => {
         price: 'required|numeric',
         taxable: 'required',
         brand: 'required',
-        category: 'required'
+        categories: 'required'
       };
 
       const product = getState().product.product;
 
       const brand = unformatSelectOptions([product.brand]);
-      const category = unformatSelectOptions(product.categories);
+      // Update: Ensure proper category mapping
+      const categories = product.categories.map(cat => ({
+        _id: cat._id, // Extract the _id from category objects
+        name: cat.name
+      }));
 
       const newProduct = {
         name: product.name,
@@ -376,7 +380,10 @@ export const updateProduct = () => {
         price: product.price,
         taxable: product.taxable,
         brand: brand != 0 ? brand : null,
-        category: category,
+        categories: categories,
+        featured: product.featured,
+        onOffer: product.onOffer,
+        offerPrice: product.offerPrice
       };
 
       const { isValid, errors } = allFieldsValidation(newProduct, rules, {

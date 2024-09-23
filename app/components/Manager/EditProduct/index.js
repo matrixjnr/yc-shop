@@ -41,6 +41,7 @@ const EditProduct = props => {
 
   return (
     <div className='edit-product'>
+      {console.log('EditProduct props', props)}
       <div className='d-flex flex-row mx-0 mb-3'>
         <label className='mr-1'>Product link </label>
         <Link to={`/product/${product.slug}`} className='default-link'>
@@ -156,13 +157,21 @@ const EditProduct = props => {
               <Col xs='12' md='12'>
                 <SelectOption
                   error={formErrors['categories']}
-                  label={'Select Category: '
-                    + product.categories.map(category => category.name).join(', ')}
+                  label={'Select Category'}
                   multi={true}
-                  // defaultValue={product.categories.map(category => category.name)}
+                  // Mapping product categories to format compatible with SelectOption
+                  value={product.categories.map(category => ({
+                    value: category._id,
+                    label: category.name,
+                  }))}
                   options={categories}
-                  handleSelectChange={value => {
-                    productChange('category', value);
+                  handleSelectChange={selectedCategories => {
+                    // Updating the product's categories to match the selected values
+                    const updatedCategories = selectedCategories.map(option => ({
+                      _id: option.value,
+                      name: option.label,
+                    }));
+                    productChange('categories', updatedCategories);
                   }}
                 />
               </Col>
@@ -179,6 +188,34 @@ const EditProduct = props => {
                 activateProduct(product._id, value);
               }}
             />
+            <Switch md='12' className='my-2'
+                    id={'featured-product'}
+                    name={'featured'}
+                    label={'Featured?'}
+                    checked={product.featured}
+                    toggleCheckboxChange={value => productChange('featured', value)}
+            />
+            <Switch md='12' className='my-2'
+                    id={'onOffer-product'}
+                    name={'onOffer'}
+                    label={'On Offer?'}
+                    checked={product.onOffer}
+                    toggleCheckboxChange={value => productChange('onOffer', value)}
+            />
+            {product?.onOffer && (
+              <Input
+                type={'number'}
+                error={formErrors['offerPrice']}
+                label={'Offer Price'}
+                name={'offerPrice'}
+                min={1}
+                placeholder={'Product Offer Price'}
+                value={product?.offerPrice}
+                onInputChange={(name, value) => {
+                  productChange(name, value);
+                }}
+              />
+            )}
           </Col>
         </Row>
         <hr/>

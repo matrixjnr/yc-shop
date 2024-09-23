@@ -30,7 +30,7 @@ const PrevArrow = (props) => {
   );
 };
 
-const FeaturedProductsComponent = ({ products }) => {
+const FeaturedProductsComponent = ({ products, title }) => {
   const sliderSettings = {
     dots: false,
     infinite: false,
@@ -75,7 +75,7 @@ const FeaturedProductsComponent = ({ products }) => {
             <div className="border">
               <div className="d-flex px-4 py-3 align-items-baseline justify-content-between">
                 <h3 className="fs-16 fs-md-20 fw-700 mb-2 mb-sm-0">
-                  <span>Featured Products</span>
+                  <span>{title}</span>
                 </h3>
                 <div className="d-flex">
                   <button className="arrow-prev text-secondary mr-2">

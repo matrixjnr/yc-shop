@@ -13,6 +13,7 @@ import LoadingIndicator from "../../components/Common/LoadingIndicator";
 import CarouselComponent from "../../components/Common/CategorySlider";
 import FlashSaleComponent from "../../components/Common/FlashSale";
 import FeaturedProductsComponent from "../../components/Common/FeaturedComponent";
+import TodayDeals from "../../components/Common/TodayDeals";
 
 class Homepage extends React.PureComponent {
   componentDidMount() {
@@ -28,12 +29,27 @@ class Homepage extends React.PureComponent {
     // Safely filter the products by checking if categories exist
     const onOfferProducts = products.filter((product) => product.onOffer);
     const featuredProducts = products.filter((product) => product.featured);
+
+    // categories is an array of objects[{name: "Today"}, {name: "Best Sell"}]
     const todayTopPicks = products.filter(
-      (product) => product.categories && product.categories.some((category) => category.name === "Today")
+      (product) =>
+        product.categories &&
+        product.categories.some((category) => category.name.toLowerCase().includes("today"))
     );
+
+    // today category slug from the first product but the category should match today
+    // const categorySlug = todayTopPicks[0]?.categories.find((category) =>
+    //   category.name.toLowerCase().includes("today")
+    // )?.slug;
+
+    const categorySlug = todayTopPicks.length;
+
     const bestSellers = products.filter(
-      (product) => product.categories && product.categories.some((category) => category.name === "Best Seller")
+      (product) =>
+        product.categories &&
+        product.categories.some((category) => category.name.toLowerCase().includes("best sell"))
     );
+
 
     // const onOfferProducts = [];
     // const featuredProducts = [];
@@ -86,6 +102,11 @@ class Homepage extends React.PureComponent {
         <FlashSaleComponent />
         {isLoading && <LoadingIndicator />}
         <Row className="flex-row">
+          {todayTopPicks.length > 0 && (
+            <Col xs="12" className="mb-3 mt-5 p-0">
+              <TodayDeals products={todayTopPicks} categorySlug={categorySlug} />
+            </Col>
+          )}
           {onOfferProducts.length > 0 && (
             <Col xs="12" className="mb-3 mt-4">
               <h2>On Offer</h2>
@@ -104,39 +125,12 @@ class Homepage extends React.PureComponent {
           )}
           {featuredProducts.length > 0 && (
             <Col xs="12" className="mb-3 mt-5">
-              <FeaturedProductsComponent products={featuredProducts} />
-            </Col>
-          )}
-          {todayTopPicks.length > 0 && (
-            <Col xs="12" className="mb-3 mt-5">
-              <h2>HP Laptops</h2>
-              <Slider {...sliderSettings}>
-                {todayTopPicks.map((item, index) => (
-                  <div key={index} className="product-list home-list">
-                    <ProductCard
-                      product={item}
-                      updateWishlist={updateWishlist}
-                      authenticated={authenticated}
-                    />
-                  </div>
-                ))}
-              </Slider>
+              <FeaturedProductsComponent products={featuredProducts} title="Featured Products" />
             </Col>
           )}
           {bestSellers.length > 0 && (
             <Col xs="12" className="mb-3 mt-5">
-              <h2>HP Laptops</h2>
-              <Slider {...sliderSettings}>
-                {todayTopPicks.map((item, index) => (
-                  <div key={index} className="product-list home-list">
-                    <ProductCard
-                      product={item}
-                      updateWishlist={updateWishlist}
-                      authenticated={authenticated}
-                    />
-                  </div>
-                ))}
-              </Slider>
+              <FeaturedProductsComponent products={featuredProducts} title="Best Selling Products" />
             </Col>
           )}
         </Row>
