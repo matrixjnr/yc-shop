@@ -30,7 +30,7 @@ const PrevArrow = (props) => {
   );
 };
 
-const FeaturedProductsComponent = ({ products, title }) => {
+const FeaturedProductsComponent = ({ products, title, updateWishlist, authenticated }) => {
   const sliderSettings = {
     dots: false,
     infinite: false,
@@ -89,7 +89,12 @@ const FeaturedProductsComponent = ({ products, title }) => {
               <div className="px-xl-1">
                 <Slider {...sliderSettings}>
                   {products.map((product) => (
-                    <NewProductCard key={product.id} product={product} />
+                    <NewProductCard
+                      key={product.id}
+                      product={product}
+                      updateWishlist={updateWishlist}
+                      authenticated={authenticated}
+                    />
                   ))}
                 </Slider>
               </div>

@@ -38,11 +38,19 @@ class Homepage extends React.PureComponent {
     );
 
     // today category slug from the first product but the category should match today
-    // const categorySlug = todayTopPicks[0]?.categories.find((category) =>
-    //   category.name.toLowerCase().includes("today")
-    // )?.slug;
+    const categorySlug = todayTopPicks[0]?.categories.find((category) =>
+      category.name.toLowerCase().includes("today")
+    )?.slug;
 
-    const categorySlug = todayTopPicks.length;
+    const flashSaleProducts = products.filter(
+      (product) =>
+        product.categories &&
+        product.categories.some((category) => category.name.toLowerCase().includes("flash"))
+    );
+
+    const flashSaleSlug = flashSaleProducts[0]?.categories.find((category) =>
+      category.name.toLowerCase().includes("flash")
+    )?.slug;
 
     const bestSellers = products.filter(
       (product) =>
@@ -99,7 +107,7 @@ class Homepage extends React.PureComponent {
     return (
       <div className="homepage">
         <CarouselComponent />
-        <FlashSaleComponent />
+        <FlashSaleComponent products={flashSaleProducts} flashSaleSlug={flashSaleSlug}/>
         {isLoading && <LoadingIndicator />}
         <Row className="flex-row">
           {todayTopPicks.length > 0 && (
@@ -125,12 +133,22 @@ class Homepage extends React.PureComponent {
           )}
           {featuredProducts.length > 0 && (
             <Col xs="12" className="mb-3 mt-5">
-              <FeaturedProductsComponent products={featuredProducts} title="Featured Products" />
+              <FeaturedProductsComponent
+                products={featuredProducts}
+                title="Featured Products"
+                updateWishlist={updateWishlist}
+                authenticated={authenticated}
+              />
             </Col>
           )}
           {bestSellers.length > 0 && (
             <Col xs="12" className="mb-3 mt-5">
-              <FeaturedProductsComponent products={featuredProducts} title="Best Selling Products" />
+              <FeaturedProductsComponent
+                products={featuredProducts}
+                title="Best Selling Products"
+                updateWishlist={updateWishlist}
+                authenticated={authenticated}
+              />
             </Col>
           )}
         </Row>

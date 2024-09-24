@@ -1,6 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
-import {Link} from "react-router-dom"; // Import Carousel Slider
+import {Link} from "react-router-dom";
+import {formatMoney} from "../../../utils"; // Import Carousel Slider
 
 // Custom next arrow
 const NextArrow = (props) => {
@@ -73,14 +74,29 @@ const TodayDeals = ({ products, categorySlug }) => {
                             <div className="img h-80px w-80px rounded-content overflow-hidden mx-auto">
                               <img
                                 className="img-fit-deals m-auto has-transition"
-                                src={product.imageUrl || 'https://smartworldkenya.com/public/assets/img/placeholder.jpg'}
+                                src={product.imageUrl}
                                 alt={product.name}
-                                onError={(e) => (e.target.src = 'https://smartworldkenya.com/public/assets/img/placeholder.jpg')}
                               />
                             </div>
+                            <div className="fs-10 fs-md-12 mt-2 text-center h-md-20px text-dark"
+                                 style={{
+                                   whiteSpace: 'nowrap',
+                                   overflow: 'hidden',
+                                   textOverflow: 'ellipsis',
+                                   width: '150px',  // Define a fixed width or max-width
+                                   margin: '0 auto', // Center the text if necessary
+                                 }}
+                            >
+                              <span className="d-block fw-500 text-white">
+                                {product.name}
+                              </span>
+                            </div>
+                            <div className="fs-10 fs-md-12 mt-0 text-center h-md-20px text-white">
+                              <span className="d-block fw-500 text-white">by {product.brand.name}</span>
+                            </div>
                             {/* Price */}
-                            <div className="fs-14 mt-3 text-center">
-                              <span className="d-block text-white fw-700">{`KSH${product.price}`}</span>
+                            <div className="fs-14 mt-0 text-center">
+                              <span className="d-block text-white fw-700">{`${formatMoney(product.price)}`}</span>
                             </div>
                           </a>
                         </div>

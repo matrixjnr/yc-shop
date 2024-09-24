@@ -2,6 +2,8 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import {formatMoney} from "../../../utils";
+import {Link} from "react-router-dom";
 
 // Custom next arrow
 const NextArrow = (props) => {
@@ -31,74 +33,7 @@ const PrevArrow = (props) => {
   );
 };
 
-const FlashSaleComponent = () => {
-  const products = [
-    {
-      name: "Apple AirPods Max",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/rGihn0qtD5iusXcY5CNcpLWsakzqzQZubuM214A5.webp",
-      price: "KSH95,999",
-      oldPrice: "KSH96,000",
-      link: "https://smartworldkenya.com/product/apple-airpods-max-thrsm"
-    },
-    {
-      name: "Apple iPhone 14 Pro Max",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/P0RW398m38BdFjLffYFnavuLY1W6QUC3o6yYqF3p.webp",
-      price: "KSH177,999",
-      oldPrice: "KSH178,000",
-      link: "https://smartworldkenya.com/product/apple-iphone-14-pro-max"
-    },
-    {
-      name: "Apple AirPods Pro 2",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/eADbyH1gj2ptF7G0rNc1fGTwg5hOkDE0bXI9GN1Z.webp",
-      price: "KSH33,598",
-      oldPrice: "KSH33,599",
-      link: "https://smartworldkenya.com/product/apple-airpods-pro-2"
-    },
-    {
-      name: "Apple AirPods Max",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/rGihn0qtD5iusXcY5CNcpLWsakzqzQZubuM214A5.webp",
-      price: "KSH95,999",
-      oldPrice: "KSH96,000",
-      link: "https://smartworldkenya.com/product/apple-airpods-max-thrsm"
-    },
-    {
-      name: "Apple iPhone 14 Pro Max",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/P0RW398m38BdFjLffYFnavuLY1W6QUC3o6yYqF3p.webp",
-      price: "KSH177,999",
-      oldPrice: "KSH178,000",
-      link: "https://smartworldkenya.com/product/apple-iphone-14-pro-max"
-    },
-    {
-      name: "Apple AirPods Pro 2",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/eADbyH1gj2ptF7G0rNc1fGTwg5hOkDE0bXI9GN1Z.webp",
-      price: "KSH33,598",
-      oldPrice: "KSH33,599",
-      link: "https://smartworldkenya.com/product/apple-airpods-pro-2"
-    },
-    {
-      name: "Apple AirPods Max",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/rGihn0qtD5iusXcY5CNcpLWsakzqzQZubuM214A5.webp",
-      price: "KSH95,999",
-      oldPrice: "KSH96,000",
-      link: "https://smartworldkenya.com/product/apple-airpods-max-thrsm"
-    },
-    {
-      name: "Apple iPhone 14 Pro Max",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/P0RW398m38BdFjLffYFnavuLY1W6QUC3o6yYqF3p.webp",
-      price: "KSH177,999",
-      oldPrice: "KSH178,000",
-      link: "https://smartworldkenya.com/product/apple-iphone-14-pro-max"
-    },
-    {
-      name: "Apple AirPods Pro 2",
-      imgSrc: "https://smartworldkenya.com/public/uploads/all/eADbyH1gj2ptF7G0rNc1fGTwg5hOkDE0bXI9GN1Z.webp",
-      price: "KSH33,598",
-      oldPrice: "KSH33,599",
-      link: "https://smartworldkenya.com/product/apple-airpods-pro-2"
-    },
-    // Add more products here
-  ];
-
+const FlashSaleComponent = ({ products, flashSaleSlug }) => {
   const settings = {
     dots: false,
     infinite: true,
@@ -164,10 +99,7 @@ const FlashSaleComponent = () => {
 
           {/* Links */}
           <div className="text-white d-flex align-items-center mb-0">
-            <a href="https://smartworldkenya.com/flash-deals" className="fs-10 fs-md-12 fw-700 text-reset text-white opacity-60 hov-opacity-100 hov-text-primary mr-3">View All Flash Sale</a>
-            <span className="border-left border-soft-light border-width-2 pl-3 text-white">
-              <a href="https://smartworldkenya.com/flash-deal/deals-of-the-day-uxvjp" className="fs-10 fs-md-12 fw-700 text-white text-reset opacity-60 hov-opacity-100 hov-text-primary">View All Products from This Flash Sale</a>
-            </span>
+            <Link to={`/shop/category/${flashSaleSlug}`} className="fs-10 fs-md-12 fw-700 text-reset text-white opacity-60 hov-opacity-100 hov-text-primary mr-3">View All Flash Sale</Link>
           </div>
         </div>
 
@@ -184,16 +116,28 @@ const FlashSaleComponent = () => {
               {products.map((product, index) => (
                 <div key={index} className="carousel-box bg-white">
                   <div className="h-150px h-md-200px h-lg-240px flash-deal-item position-relative text-center has-transition hov-shadow-out z-1">
-                    <a href={product.link} className="d-block py-md-2 overflow-hidden hov-scale-img" title={product.name}>
+                    <a href={product.link} className="d-block py-md-2 overflow-hidden hov-scale-img"
+                       title={product.name}>
                       <img
-                        src={product.imgSrc}
+                        src={product.imageUrl}
                         className="h-100px h-md-120px h-lg-140px mw-100 mx-auto has-transition"
                         alt={product.name}
-                        onError={(e) => (e.target.src = 'https://smartworldkenya.com/public/assets/img/placeholder.jpg')}
                       />
-                      <div className="fs-10 fs-md-14 mt-2 text-center h-md-48px has-transition overflow-hidden pt-md-4 flash-deal-price lh-1-5">
-                        <span className="d-block text-primary fw-700">{product.price}</span>
-                        <del className="d-block fw-400 text-secondary">{product.oldPrice}</del>
+                      <div className="fs-10 fs-md-12 mt-2 text-center h-md-20px text-dark"
+                           style={{
+                             whiteSpace: 'nowrap',
+                             overflow: 'hidden',
+                             textOverflow: 'ellipsis'
+                           }}
+                      >
+                        <span className="d-block fw-500">{product.name}</span>
+                      </div>
+                      <div className="fs-10 fs-md-12 mt-2 text-center h-md-20px text-dark">
+                        <span className="d-block fw-500">by {product.brand.name}</span>
+                      </div>
+                      <div
+                        className="fs-10 fs-md-14 mt-2 text-center h-md-48px has-transition overflow-hidden flash-deal-price lh-1-5">
+                        <span className="d-block text-primary fw-700">{formatMoney(product.price)}</span>
                       </div>
                     </a>
                   </div>

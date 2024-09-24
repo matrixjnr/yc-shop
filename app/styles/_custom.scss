@@ -215,7 +215,6 @@
 /* Arrow Customization */
 .slick-arrow {
   background-color: #fff;
-  border: 1px solid #A3065F;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -225,13 +224,13 @@
 }
 
 .slick-arrow:hover {
-  background-color: #A3065F;
+  background-color: #1369b2;
   color: #fff;
 }
 
 .slick-arrow i {
   font-size: 20px;
-  color: #A3065F;
+  color: #A3065F !important;
 }
 
 .slick-arrow:hover i {
@@ -431,4 +430,21 @@
   transition: transform 0.3s ease;
 }
 
+.absolute-top-right {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1;
+}
 
+@media (min-width: 992px) {
+  .h-lg-140px, .size-lg-140px {
+    height: 40px;
+  }
+}
+
+@media (min-width: 768px) {
+  .h-md-120px, .size-md-120px {
+    height: 30px;
+  }
+}
