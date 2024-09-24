@@ -6,6 +6,7 @@
 
 export const FETCH_PRODUCTS = 'src/Product/FETCH_PRODUCTS';
 export const FETCH_STORE_PRODUCTS = 'src/Product/FETCH_STORE_PRODUCTS';
+export const FETCH_ALL_PRODUCTS = 'src/Product/FETCH_ALL_PRODUCTS';
 export const FETCH_PRODUCT = 'src/Product/FETCH_PRODUCT';
 export const FETCH_STORE_PRODUCT = 'src/Product/FETCH_STORE_PRODUCT';
 export const PRODUCT_CHANGE = 'src/Product/PRODUCT_CHANGE';

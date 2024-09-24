@@ -1,13 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import actions from "../../actions";
-import banners from "./banners.json";
 
-import CarouselSlider from "../../components/Common/CarouselSlider";
-import { responsiveOneItemCarousel } from "../../components/Common/CarouselSlider/utils";
 import ProductCard from "../../components/Store/ProductCard";
 import LoadingIndicator from "../../components/Common/LoadingIndicator";
 import CarouselComponent from "../../components/Common/CategorySlider";
@@ -19,10 +15,12 @@ class Homepage extends React.PureComponent {
   componentDidMount() {
     const slug = this.props.match.params.slug;
     this.props.filterProducts(slug);
+    this.props.fetchAllProducts();
+    this.props.fetchCategoriesSelect();
   }
 
   render() {
-    const { products, isLoading, authenticated, updateWishlist, brands } =
+    const { products, isLoading, authenticated, updateWishlist, brands, allProducts, categories } =
       this.props;
 
     // Filter the products
@@ -31,40 +29,37 @@ class Homepage extends React.PureComponent {
     const featuredProducts = products.filter((product) => product.featured);
 
     // categories is an array of objects[{name: "Today"}, {name: "Best Sell"}]
-    const todayTopPicks = products.filter(
+    const todayTopPicks = allProducts.filter(
       (product) =>
         product.categories &&
-        product.categories.some((category) => category.name.toLowerCase().includes("today"))
+        product.categories.some((category) =>
+          category.name.trim().toLowerCase().includes("today")
+        )
     );
 
-    // today category slug from the first product but the category should match today
     const categorySlug = todayTopPicks[0]?.categories.find((category) =>
-      category.name.toLowerCase().includes("today")
+      category.name.trim().toLowerCase().includes("today")
     )?.slug;
 
-    const flashSaleProducts = products.filter(
+    const flashSaleProducts = allProducts.filter(
       (product) =>
         product.categories &&
-        product.categories.some((category) => category.name.toLowerCase().includes("flash"))
+        product.categories.some((category) =>
+          category.name.trim().toLowerCase().includes("flash")
+        )
     );
 
     const flashSaleSlug = flashSaleProducts[0]?.categories.find((category) =>
-      category.name.toLowerCase().includes("flash")
+      category.name.trim().toLowerCase().includes("flash")
     )?.slug;
 
-    const bestSellers = products.filter(
+    const bestSellers = allProducts.filter(
       (product) =>
         product.categories &&
-        product.categories.some((category) => category.name.toLowerCase().includes("best sell"))
+        product.categories.some((category) =>
+          category.name.trim().toLowerCase().includes("best")
+        )
     );
-
-
-    // const onOfferProducts = [];
-    // const featuredProducts = [];
-    // const todayTopPicks = [];
-    // const bestSellers = [];
-
-    console.log("onOfferProducts", onOfferProducts);
 
     const sliderSettings = {
       dots: true,
@@ -160,6 +155,7 @@ class Homepage extends React.PureComponent {
 const mapStateToProps = (state) => {
   return {
     products: state.product.storeProducts,
+    allProducts: state.product.allProducts,
     isLoading: state.product.isLoading,
     authenticated: state.authentication.authenticated,
     brands: state.brand.storeBrands,

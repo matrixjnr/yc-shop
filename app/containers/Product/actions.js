@@ -24,7 +24,7 @@ import {
   FETCH_PRODUCTS_SELECT,
   SET_PRODUCTS_LOADING,
   SET_ADVANCED_FILTERS,
-  RESET_ADVANCED_FILTERS
+  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS
 } from './constants';
 
 import { API_URL, ROLES } from '../../constants';
@@ -195,6 +195,26 @@ export const fetchProducts = () => {
 
       dispatch({
         type: FETCH_PRODUCTS,
+        payload: response.data.products
+      });
+    } catch (error) {
+      handleError(error, dispatch);
+    } finally {
+      dispatch(setProductLoading(false));
+    }
+  };
+};
+
+// fetch all special category products api
+export const fetchAllProducts = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(setProductLoading(true));
+
+      const response = await axios.get(`${API_URL}/product/special`);
+
+      dispatch({
+        type: FETCH_ALL_PRODUCTS,
         payload: response.data.products
       });
     } catch (error) {

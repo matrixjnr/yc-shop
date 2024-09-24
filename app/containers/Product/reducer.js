@@ -22,12 +22,13 @@ import {
   FETCH_PRODUCTS_SELECT,
   SET_PRODUCTS_LOADING,
   SET_ADVANCED_FILTERS,
-  RESET_ADVANCED_FILTERS
+  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS
 } from './constants';
 
 const initialState = {
   products: [],
   storeProducts: [],
+  allProducts: [],
   product: {
     _id: ''
   },
@@ -100,6 +101,11 @@ const productReducer = (state = initialState, action) => {
         },
         shopFormErrors: {}
       };
+    case FETCH_ALL_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload
+      }
     case SET_PRODUCTS_LOADING:
       return {
         ...state,
