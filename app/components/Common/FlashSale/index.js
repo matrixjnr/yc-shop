@@ -132,9 +132,9 @@ const FlashSaleComponent = ({ products, flashSaleSlug }) => {
                       >
                         <span className="d-block fw-500">{product.name}</span>
                       </div>
-                      <div className="fs-10 fs-md-12 mt-2 text-center h-md-20px text-dark">
-                        <span className="d-block fw-500">by {product.brand.name}</span>
-                      </div>
+                      {/*<div className="fs-10 fs-md-12 mt-2 text-center h-md-20px text-dark">*/}
+                      {/*  <span className="d-block fw-500">by {product.brand.name}</span>*/}
+                      {/*</div>*/}
                       <div
                         className="fs-10 fs-md-14 mt-2 text-center h-md-48px has-transition overflow-hidden flash-deal-price lh-1-5">
                         <span className="d-block text-primary fw-700">{formatMoney(product.price)}</span>

@@ -6,7 +6,7 @@
 // homepage .slick-track dispay to flex
 .homepage .slick-track {
   display: flex !important;
-  justify-content: center;
+  //justify-content: center;
 }
 
 // homepage .slick-slide height to 300px
@@ -269,6 +269,7 @@
 
 /* Product Image */
 .aiz-card-box img {
+  height: 200px !important;
   max-height: 200px;
   margin: 0 auto;
   display: block;
@@ -371,9 +372,9 @@
 }
 
 /* Carousel adjustments */
-.slick-slide {
-  margin: 0 10px;
-}
+//.slick-slide {
+//  margin: 0 10px;
+//}
 
 .slick-track {
   display: flex;
@@ -446,5 +447,31 @@
 @media (min-width: 768px) {
   .h-md-120px, .size-md-120px {
     height: 30px;
+  }
+}
+
+.today-p-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: 'ellipsis';
+  width: 150px;
+}
+
+@media (max-width: 768px) {
+  .today-p-name {
+    width: 100px;
+  }
+}
+
+@media (max-width: 576px) {
+  .today-p-name {
+    width: 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .img {
+    width: 60px;
+    height: 60px;
   }
 }

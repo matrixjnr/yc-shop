@@ -44,6 +44,36 @@ const TodayDeals = ({ products, categorySlug }) => {
     dots: false,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+          arrows: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 2,
+          arrows: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          arrows: true,
+        },
+      },
+    ],
   };
 
   return (
@@ -78,22 +108,14 @@ const TodayDeals = ({ products, categorySlug }) => {
                                 alt={product.name}
                               />
                             </div>
-                            <div className="fs-10 fs-md-12 mt-2 text-center h-md-20px text-dark"
-                                 style={{
-                                   whiteSpace: 'nowrap',
-                                   overflow: 'hidden',
-                                   textOverflow: 'ellipsis',
-                                   width: '150px',  // Define a fixed width or max-width
-                                   margin: '0 auto', // Center the text if necessary
-                                 }}
-                            >
+                            <div className="fs-10 fs-md-12 mt-2 text-center h-md-20px text-dark today-p-name">
                               <span className="d-block fw-500 text-white">
                                 {product.name}
                               </span>
                             </div>
-                            <div className="fs-10 fs-md-12 mt-0 text-center h-md-20px text-white">
-                              <span className="d-block fw-500 text-white">by {product.brand.name}</span>
-                            </div>
+                            {/*<div className="fs-10 fs-md-12 mt-0 text-center h-md-20px text-white">*/}
+                            {/*  <span className="d-block fw-500 text-white">by {product.brand.name}</span>*/}
+                            {/*</div>*/}
                             {/* Price */}
                             <div className="fs-14 mt-0 text-center">
                               <span className="d-block text-white fw-700">{`${formatMoney(product.price)}`}</span>
