@@ -10,13 +10,14 @@ import CarouselComponent from "../../components/Common/CategorySlider";
 import FlashSaleComponent from "../../components/Common/FlashSale";
 import FeaturedProductsComponent from "../../components/Common/FeaturedComponent";
 import TodayDeals from "../../components/Common/TodayDeals";
+import {fetchCategories} from "../Category/actions";
 
 class Homepage extends React.PureComponent {
   componentDidMount() {
     const slug = this.props.match.params.slug;
-    this.props.filterProducts(slug);
+    // this.props.filterProducts(slug);
     this.props.fetchAllProducts();
-    this.props.fetchCategoriesSelect();
+    this.props.fetchCategories();
   }
 
   render() {
@@ -25,8 +26,17 @@ class Homepage extends React.PureComponent {
 
     // Filter the products
     // Safely filter the products by checking if categories exist
-    const onOfferProducts = products.filter((product) => product.onOffer);
-    const featuredProducts = products.filter((product) => product.featured);
+    const onOfferProducts = allProducts.filter((product) => product.onOffer);
+    const featuredProducts = allProducts.filter((product) => product.featured);
+
+    // all products length
+    const allProductsLength = allProducts.length;
+
+    // on offer products length
+    const onOfferProductsLength = onOfferProducts.length;
+
+    // featured products length
+    const featuredProductsLength = featuredProducts.length;
 
     // categories is an array of objects[{name: "Today"}, {name: "Best Sell"}]
     const todayTopPicks = allProducts.filter(
@@ -41,6 +51,9 @@ class Homepage extends React.PureComponent {
       category.name.trim().toLowerCase().includes("today")
     )?.slug;
 
+    // today top picks length
+    const todayTopPicksLength = todayTopPicks.length;
+
     const flashSaleProducts = allProducts.filter(
       (product) =>
         product.categories &&
@@ -53,6 +66,8 @@ class Homepage extends React.PureComponent {
       category.name.trim().toLowerCase().includes("flash")
     )?.slug;
 
+    // flash sale products length
+
     const bestSellers = allProducts.filter(
       (product) =>
         product.categories &&
@@ -60,6 +75,9 @@ class Homepage extends React.PureComponent {
           category.name.trim().toLowerCase().includes("best")
         )
     );
+
+    // best sell products length
+    const bestSellersLength = bestSellers.length;
 
     const sliderSettings = {
       dots: true,
@@ -75,7 +93,7 @@ class Homepage extends React.PureComponent {
             slidesToShow: 3,
             slidesToScroll: 1,
             infinite: true,
-            dots: false,
+            dots: true,
             arrows: false,
           },
         },
@@ -86,6 +104,7 @@ class Homepage extends React.PureComponent {
             slidesToScroll: 1,
             initialSlide: 2,
             arrows: false,
+            dots: false,
           },
         },
         {
@@ -101,7 +120,7 @@ class Homepage extends React.PureComponent {
 
     return (
       <div className="homepage">
-        <CarouselComponent />
+        <CarouselComponent categories={categories}/>
         <FlashSaleComponent products={flashSaleProducts} flashSaleSlug={flashSaleSlug}/>
         {isLoading && <LoadingIndicator />}
         <Row className="flex-row">
@@ -115,7 +134,7 @@ class Homepage extends React.PureComponent {
               <h2>On Offer</h2>
               <Slider {...sliderSettings}>
                 {onOfferProducts.map((item, index) => (
-                  <div key={index} className="product-list home-list">
+                  <div key={index} className="product-list home-list w-90">
                     <ProductCard
                       product={item}
                       updateWishlist={updateWishlist}
@@ -159,6 +178,7 @@ const mapStateToProps = (state) => {
     isLoading: state.product.isLoading,
     authenticated: state.authentication.authenticated,
     brands: state.brand.storeBrands,
+    categories: state.category.categories,
   };
 };
 
