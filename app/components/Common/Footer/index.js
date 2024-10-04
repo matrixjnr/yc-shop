@@ -15,7 +15,7 @@ const Footer = () => {
   const infoLinks = [
     { id: 0, name: 'Contact Us', to: '/contact' },
     { id: 1, name: 'Sell With Us', to: '/sell' },
-    { id: 2, name: 'Shipping', to: '/shipping' }
+    { id: 2, name: 'Submit Custom Order', to: '/contact' }
   ];
 
   const footerBusinessLinks = (
@@ -60,9 +60,12 @@ const Footer = () => {
           <div className='footer-block'>
             <div className='block-title'>
               <h3 className='footer-text-uppercase'>Newsletter</h3>
-              <Newsletter />
+              <Newsletter/>
             </div>
           </div>
+        </div>
+        <div className='footer-copyright'>
+          <span>Shop S6, Ground Floor, Veteran House Next to Bihi Towers, Moi Avenue, Nairobi-Kenya</span>
         </div>
         <div className='footer-copyright'>
           <span>© {new Date().getFullYear()} Young Computer Store</span>
@@ -70,22 +73,22 @@ const Footer = () => {
         <ul className='footer-social-item'>
           <li>
             <a href='https://web.facebook.com/youngcompsystem' rel='noreferrer noopener' target='_blank'>
-              <span className='facebook-icon' />
+              <span className='facebook-icon'/>
             </a>
           </li>
           <li>
-            <a href='/#instagram' rel='noreferrer noopener' target='_blank'>
-              <span className='instagram-icon' />
+            <a href='https://www.instagram.com/young_computers_ke' rel='noreferrer noopener' target='_blank'>
+              <span className='instagram-icon'/>
             </a>
           </li>
+          {/*<li>*/}
+          {/*  <a href='/#pinterest' rel='noreferrer noopener' target='_blank'>*/}
+          {/*    <span className='pinterest-icon'/>*/}
+          {/*  </a>*/}
+          {/*</li>*/}
           <li>
-            <a href='/#pinterest' rel='noreferrer noopener' target='_blank'>
-              <span className='pinterest-icon' />
-            </a>
-          </li>
-          <li>
-            <a href='/#twitter' rel='noreferrer noopener' target='_blank'>
-              <span className='twitter-icon' />
+            <a href='https://x.com/young_computer' rel='noreferrer noopener' target='_blank'>
+              <span className='twitter-icon'/>
             </a>
           </li>
         </ul>
