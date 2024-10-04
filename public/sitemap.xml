@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap-image/1.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap-image/1.1
+        http://www.sitemaps.org/schemas/sitemap-image/1.1/sitemap-image.xsd">
+
+    <!-- Fixed Pages -->
+    <url>
+        <loc>https://youngcomputers.co.ke/</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/contact</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/sell</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- High-Priority Dynamic Pages -->
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/flash-sale</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/best-selling</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/today-top-picks</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <!-- Other Dynamic Pages -->
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/new-laptops</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/ex-uk-laptops</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/new-desktops</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/ex-uk-desktops</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/new-monitors</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/ex-uk-monitors</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/new-tablets</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/category/ex-uk-tablets</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- New HP Brand Page -->
+    <url>
+        <loc>https://youngcomputers.co.ke/shop/brand/hp</loc>
+        <lastmod>2024-10-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>
