@@ -14,10 +14,18 @@ import {fetchCategories} from "../Category/actions";
 
 class Homepage extends React.PureComponent {
   componentDidMount() {
+    const { fetchAllProducts, fetchCategories } = this.props;
     const slug = this.props.match.params.slug;
     // this.props.filterProducts(slug);
-    this.props.fetchAllProducts();
-    this.props.fetchCategories();
+
+    // Use Promise.all to fetch products and categories simultaneously
+    Promise.all([fetchAllProducts(), fetchCategories()])
+      .then(() => {
+        // Data loading complete
+      })
+      .catch((error) => {
+        console.error('Error loading data', error);
+      });
   }
 
   render() {

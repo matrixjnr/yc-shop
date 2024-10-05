@@ -34,6 +34,7 @@ const CartList = props => {
                           ? item.imageUrl
                           : '/images/placeholder-image.png'
                       }`}
+                      alt={item.name}
                     />
 
                     <Link

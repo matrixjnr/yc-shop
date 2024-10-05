@@ -155,7 +155,7 @@ const CarouselComponent = ({categories}) => {
                   </Link>
                 </div>
                 <div className="text-center h-35px text-truncate-2 mt-2">
-                  <a href={category.link} className="fs-13 fw-500 text-center text-reset hov-text-primary">
+                  <a href={`/shop/category/${category.slug}`} className="fs-13 fw-500 text-center text-reset hov-text-primary">
                     {category.name}
                   </a>
                 </div>

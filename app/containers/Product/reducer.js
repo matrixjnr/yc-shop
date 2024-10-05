@@ -70,7 +70,7 @@ const initialState = {
     totalPages: 1,
     currentPage: 1,
     count: 0,
-    limit: 10
+    limit: 12
   }
 };
 
@@ -222,7 +222,7 @@ const productReducer = (state = initialState, action) => {
           totalPages: 1,
           currentPage: 1,
           count: 0,
-          limit: 10
+          limit: 12
         }
       };
     default:
