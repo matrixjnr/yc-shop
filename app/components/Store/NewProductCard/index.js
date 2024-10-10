@@ -32,7 +32,7 @@ const NewProductCard = ({product, updateWishlist, authenticated}) => {
           </Link>
 
           <div className="p-2 p-md-3 text-left">
-            <h3 className="fw-400 fs-13 text-truncate-2 lh-1-4 mb-0 h-35px text-left">
+            <h3 className="fw-400 fs-13 text-truncate-2 sliding-text lh-1-4 mb-0 h-35px text-left">
               <Link
                 to={`/product/${product.slug}`}
                 className="d-block text-reset hov-text-primary"
@@ -40,10 +40,10 @@ const NewProductCard = ({product, updateWishlist, authenticated}) => {
                 {product.name}
               </Link>
             </h3>
-            <div className="fs-14 d-flex justify-content-start mt-3">
+            <div className="fs-12 d-flex justify-content-start mt-3">
               {product.offerPrice && (
-                <div className="disc-amount has-transition mr-1">
-                  <del className="fw-400">
+                <div className="fs-12 disc-amount has-transition mr-1">
+                  <del className="fs-12 fw-400">
                     {`${formatMoney(product.price)}`}
                   </del>
                 </div>

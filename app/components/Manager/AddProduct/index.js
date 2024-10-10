@@ -1,26 +1,18 @@
-/**
- *
- * AddProduct
- *
- */
-
-import React from 'react';
-
-import { Row, Col } from 'reactstrap';
-
-import { ROLES } from '../../../constants';
+import React, { useState } from 'react';
+import {Row, Col, Spinner} from 'reactstrap';
 import Input from '../../Common/Input';
 import Switch from '../../Common/Switch';
 import Button from '../../Common/Button';
 import SelectOption from '../../Common/SelectOption';
 import Editor from 'react-simple-wysiwyg';
+import {ROLES} from "../../../constants";
 
 const taxableSelect = [
   { value: 1, label: 'Yes' },
   { value: 0, label: 'No' }
 ];
 
-const AddProduct = props => {
+const AddProduct = (props) => {
   const {
     user,
     productFormData,
@@ -32,28 +24,34 @@ const AddProduct = props => {
     image
   } = props;
 
-  const handleSubmit = event => {
+  // Loading state to manage form submission
+  const [isSubmitting, setSubmitting] = useState(false);
+
+  // Handle form submission
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    addProduct();
+
+    // Prevent multiple submissions
+    if (isSubmitting) return;
+
+    // Set loading state
+    setSubmitting(true);
+
+    try {
+      console.log('Submitting product');
+      await addProduct(); // Call addProduct function
+      console.log('Finished calling addProduct');
+    } catch (error) {
+      console.error('Error adding product:', error);
+    } finally {
+      setSubmitting(false); // Reset loading state
+    }
   };
 
   return (
     <div className='add-product'>
       <form onSubmit={handleSubmit} noValidate>
         <Row>
-          {/*<Col xs='12' lg='6'>*/}
-          {/*  <Input*/}
-          {/*    type={'text'}*/}
-          {/*    error={formErrors['sku']}*/}
-          {/*    label={'Sku'}*/}
-          {/*    name={'sku'}*/}
-          {/*    placeholder={'Product Sku'}*/}
-          {/*    value={productFormData.sku}*/}
-          {/*    onInputChange={(name, value) => {*/}
-          {/*      productChange(name, value);*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Col>*/}
           <Col xs='12' lg='6'>
             <Input
               type={'text'}
@@ -77,7 +75,7 @@ const AddProduct = props => {
                 user.role === ROLES.Merchant ? brands[1] : productFormData.brand
               }
               options={brands}
-              handleSelectChange={value => {
+              handleSelectChange={(value) => {
                 productChange('brand', value);
               }}
             />
@@ -90,31 +88,17 @@ const AddProduct = props => {
               label={'Select Category'}
               value={productFormData.category}
               options={categories}
-              handleSelectChange={value => {
+              handleSelectChange={(value) => {
                 productChange('category', value);
               }}
             />
           </Col>
-          {/*<Col xs='12' md='12'>*/}
-          {/*  <Input*/}
-          {/*    type={'textarea'}*/}
-          {/*    error={formErrors['description']}*/}
-          {/*    label={'Description'}*/}
-          {/*    name={'description'}*/}
-          {/*    placeholder={'Product Description'}*/}
-          {/*    value={productFormData.description}*/}
-          {/*    onInputChange={(name, value) => {*/}
-          {/*      productChange(name, value);*/}
-          {/*    }}*/}
-          {/*  />*/}
-          {/*</Col>*/}
           <Col xs='12' md='12'>
-            {/*label*/}
             <h6>Description</h6>
             <Editor
               value={productFormData.description}
               name='description'
-              onChange={e => {
+              onChange={(e) => {
                 productChange('description', e.target.value);
               }}
             />
@@ -154,7 +138,7 @@ const AddProduct = props => {
               name={'taxable'}
               options={taxableSelect}
               value={productFormData.taxable}
-              handleSelectChange={value => {
+              handleSelectChange={(value) => {
                 productChange('taxable', value);
               }}
             />
@@ -178,21 +162,21 @@ const AddProduct = props => {
               name={'isActive'}
               label={'Active?'}
               checked={productFormData.isActive}
-              toggleCheckboxChange={value => productChange('isActive', value)}
+              toggleCheckboxChange={(value) => productChange('isActive', value)}
             />
-            <Switch md='12' className='my-2'
+            <Switch
               id={'featured-product'}
               name={'featured'}
               label={'Featured?'}
               checked={productFormData.featured}
-              toggleCheckboxChange={value => productChange('featured', value)}
+              toggleCheckboxChange={(value) => productChange('featured', value)}
             />
-            <Switch md='12' className='my-2'
+            <Switch
               id={'onOffer-product'}
               name={'onOffer'}
               label={'On Offer?'}
               checked={productFormData.onOffer}
-              toggleCheckboxChange={value => productChange('onOffer', value)}
+              toggleCheckboxChange={(value) => productChange('onOffer', value)}
             />
             {productFormData.onOffer && (
               <Input
@@ -212,7 +196,19 @@ const AddProduct = props => {
         </Row>
         <hr />
         <div className='add-product-actions'>
-          <Button type='submit' text='Add Product' />
+          <Button
+            type='submit'
+            text={
+              isSubmitting ? (
+                <>
+                  <Spinner /> Saving...
+                </>
+              ) : (
+                'Add Product'
+              )
+            }
+            disabled={isSubmitting}
+          />
         </div>
       </form>
     </div>

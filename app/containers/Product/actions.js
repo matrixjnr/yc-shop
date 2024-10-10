@@ -24,7 +24,7 @@ import {
   FETCH_PRODUCTS_SELECT,
   SET_PRODUCTS_LOADING,
   SET_ADVANCED_FILTERS,
-  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS
+  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS, RESET_PRODUCTS
 } from './constants';
 
 import { API_URL, ROLES } from '../../constants';
@@ -73,6 +73,10 @@ export const setProductLoading = value => {
     payload: value
   };
 };
+
+export const resetStoreProducts = () => ({
+  type: RESET_PRODUCTS,
+});
 
 // fetch store products by filterProducts api
 export const filterProducts = (n, v) => {
@@ -264,7 +268,7 @@ export const addProduct = () => {
       const rules = {
         // sku: 'required|alpha_dash',
         name: 'required',
-        description: 'required|max:600',
+        description: 'required|max:3000',
         quantity: 'required|numeric',
         price: 'required|numeric',
         taxable: 'required',
@@ -281,7 +285,7 @@ export const addProduct = () => {
       const brand = unformatSelectOptions([product.brand]);
       const category = unformatSelectOptions([product.category]);
 
-      console.log("Product: ", product);
+      console.log("Product adding inside actions.js");
 
       const newProduct = {
         // sku: product.sku,
@@ -314,7 +318,7 @@ export const addProduct = () => {
         'required.name': 'Name is required.',
         'required.description': 'Description is required.',
         'max.description':
-          'Description may not be greater than 600 characters.',
+          'Description may not be greater than 3000 characters.',
         'required.quantity': 'Quantity is required.',
         'required.price': 'Price is required.',
         'required.taxable': 'Taxable is required.',
@@ -324,9 +328,11 @@ export const addProduct = () => {
       });
 
       if (!isValid) {
+        console.log("Invalid product");
         return dispatch({ type: SET_PRODUCT_FORM_ERRORS, payload: errors });
       }
       const formData = new FormData();
+      console.log("New product", formData);
       if (newProduct.image) {
         for (const key in newProduct) {
           if (newProduct.hasOwnProperty(key)) {
@@ -344,7 +350,7 @@ export const addProduct = () => {
       const response = await axios.post(`${API_URL}/product/add`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-
+      console.log("Finished response", response);
       const successfulOptions = {
         title: `${response.data.message}`,
         position: 'tr',
@@ -361,6 +367,7 @@ export const addProduct = () => {
         dispatch(goBack());
       }
     } catch (error) {
+      console.log("Error adding product");
       handleError(error, dispatch);
     }
   };
@@ -374,7 +381,7 @@ export const updateProduct = () => {
         name: 'required',
         // sku: 'required|alpha_dash',
         slug: 'required|alpha_dash',
-        description: 'required|max:600',
+        description: 'required|max:3000',
         quantity: 'required|numeric',
         price: 'required|numeric',
         taxable: 'required',
@@ -416,7 +423,7 @@ export const updateProduct = () => {
           'Slug may have alpha-numeric characters, as well as dashes and underscores only.',
         'required.description': 'Description is required.',
         'max.description':
-          'Description may not be greater than 600 characters.',
+          'Description may not be greater than 3000 characters.',
         'required.quantity': 'Quantity is required.',
         'required.price': 'Price is required.',
         'required.taxable': 'Taxable is required.',

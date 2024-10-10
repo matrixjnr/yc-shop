@@ -3,50 +3,39 @@ import { connect } from "react-redux";
 import { Row, Col } from "reactstrap";
 import Slider from "react-slick";
 import actions from "../../actions";
-
 import ProductCard from "../../components/Store/ProductCard";
-import LoadingIndicator from "../../components/Common/LoadingIndicator";
 import CarouselComponent from "../../components/Common/CategorySlider";
 import FlashSaleComponent from "../../components/Common/FlashSale";
 import FeaturedProductsComponent from "../../components/Common/FeaturedComponent";
 import TodayDeals from "../../components/Common/TodayDeals";
-import {fetchCategories} from "../Category/actions";
+import { fetchCategories } from "../Category/actions";
+import ShimmerContainer from "../../components/Common/Shimmer";
 
 class Homepage extends React.PureComponent {
   componentDidMount() {
     const { fetchAllProducts, fetchCategories } = this.props;
-    const slug = this.props.match.params.slug;
-    // this.props.filterProducts(slug);
 
-    // Use Promise.all to fetch products and categories simultaneously
+    // Fetch all necessary data at once to reduce separate requests
     Promise.all([fetchAllProducts(), fetchCategories()])
       .then(() => {
-        // Data loading complete
+        console.log("All data loaded successfully.");
       })
       .catch((error) => {
-        console.error('Error loading data', error);
+        console.error("Error loading data:", error);
       });
   }
 
   render() {
-    const { products, isLoading, authenticated, updateWishlist, brands, allProducts, categories } =
-      this.props;
+    const {
+      isLoading,
+      authenticated,
+      updateWishlist,
+      allProducts,
+      categories,
+    } = this.props;
 
-    // Filter the products
-    // Safely filter the products by checking if categories exist
     const onOfferProducts = allProducts.filter((product) => product.onOffer);
     const featuredProducts = allProducts.filter((product) => product.featured);
-
-    // all products length
-    const allProductsLength = allProducts.length;
-
-    // on offer products length
-    const onOfferProductsLength = onOfferProducts.length;
-
-    // featured products length
-    const featuredProductsLength = featuredProducts.length;
-
-    // categories is an array of objects[{name: "Today"}, {name: "Best Sell"}]
     const todayTopPicks = allProducts.filter(
       (product) =>
         product.categories &&
@@ -54,14 +43,6 @@ class Homepage extends React.PureComponent {
           category.name.trim().toLowerCase().includes("today")
         )
     );
-
-    const categorySlug = todayTopPicks[0]?.categories.find((category) =>
-      category.name.trim().toLowerCase().includes("today")
-    )?.slug;
-
-    // today top picks length
-    const todayTopPicksLength = todayTopPicks.length;
-
     const flashSaleProducts = allProducts.filter(
       (product) =>
         product.categories &&
@@ -69,13 +50,6 @@ class Homepage extends React.PureComponent {
           category.name.trim().toLowerCase().includes("flash")
         )
     );
-
-    const flashSaleSlug = flashSaleProducts[0]?.categories.find((category) =>
-      category.name.trim().toLowerCase().includes("flash")
-    )?.slug;
-
-    // flash sale products length
-
     const bestSellers = allProducts.filter(
       (product) =>
         product.categories &&
@@ -83,9 +57,6 @@ class Homepage extends React.PureComponent {
           category.name.trim().toLowerCase().includes("best")
         )
     );
-
-    // best sell products length
-    const bestSellersLength = bestSellers.length;
 
     const sliderSettings = {
       dots: true,
@@ -128,50 +99,92 @@ class Homepage extends React.PureComponent {
 
     return (
       <div className="homepage">
-        <CarouselComponent categories={categories}/>
-        <FlashSaleComponent products={flashSaleProducts} flashSaleSlug={flashSaleSlug}/>
-        {isLoading && <LoadingIndicator />}
+        {/* Carousel Component */}
+        {isLoading ? (
+          <ShimmerContainer height={300} width="100%" /> // Shimmer placeholder
+        ) : (
+          <CarouselComponent categories={categories} />
+        )}
+
+        {/* Flash Sale Component */}
+        {isLoading ? (
+          <ShimmerContainer height={400} width="100%" /> // Shimmer placeholder for flash sale
+        ) : (
+          <FlashSaleComponent products={flashSaleProducts} />
+        )}
+
         <Row className="flex-row">
-          {todayTopPicks.length > 0 && (
+          {/* Today Top Picks */}
+          {isLoading ? (
             <Col xs="12" className="mb-3 mt-5 p-0">
-              <TodayDeals products={todayTopPicks} categorySlug={categorySlug} />
+              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for today deals */}
             </Col>
+          ) : (
+            todayTopPicks.length > 0 && (
+              <Col xs="12" className="mb-3 mt-5 p-0">
+                <TodayDeals products={todayTopPicks} />
+              </Col>
+            )
           )}
-          {onOfferProducts.length > 0 && (
+
+          {/* On Offer Products */}
+          {isLoading ? (
             <Col xs="12" className="mb-3 mt-4">
-              <h2>On Offer</h2>
-              <Slider {...sliderSettings}>
-                {onOfferProducts.map((item, index) => (
-                  <div key={index} className="product-list home-list w-90">
-                    <ProductCard
-                      product={item}
-                      updateWishlist={updateWishlist}
-                      authenticated={authenticated}
-                    />
-                  </div>
-                ))}
-              </Slider>
+              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for on offer */}
             </Col>
+          ) : (
+            onOfferProducts.length > 0 && (
+              <Col xs="12" className="mb-3 mt-4">
+                <h2>On Offer</h2>
+                <Slider {...sliderSettings}>
+                  {onOfferProducts.map((item, index) => (
+                    <div key={index} className="product-list home-list w-90">
+                      <ProductCard
+                        product={item}
+                        updateWishlist={updateWishlist}
+                        authenticated={authenticated}
+                      />
+                    </div>
+                  ))}
+                </Slider>
+              </Col>
+            )
           )}
-          {featuredProducts.length > 0 && (
+
+          {/* Featured Products */}
+          {isLoading ? (
             <Col xs="12" className="mb-3 mt-5">
-              <FeaturedProductsComponent
-                products={featuredProducts}
-                title="Featured Products"
-                updateWishlist={updateWishlist}
-                authenticated={authenticated}
-              />
+              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for featured products */}
             </Col>
+          ) : (
+            featuredProducts.length > 0 && (
+              <Col xs="12" className="mb-3 mt-5">
+                <FeaturedProductsComponent
+                  products={featuredProducts}
+                  title="Featured Products"
+                  updateWishlist={updateWishlist}
+                  authenticated={authenticated}
+                />
+              </Col>
+            )
           )}
-          {bestSellers.length > 0 && (
+
+          {/* Best Sellers */}
+          {isLoading ? (
             <Col xs="12" className="mb-3 mt-5">
-              <FeaturedProductsComponent
-                products={featuredProducts}
-                title="Best Selling Products"
-                updateWishlist={updateWishlist}
-                authenticated={authenticated}
-              />
+              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for best sellers */}
             </Col>
+          ) : (
+            bestSellers.length > 0 && (
+              <Col xs="12" className="mb-3 mt-5">
+                <FeaturedProductsComponent
+                  products={bestSellers} // Use `bestSellers` instead of `featuredProducts`
+                  title="Best Selling Products"
+                  updateWishlist={updateWishlist}
+                  authenticated={authenticated}
+                />
+              </Col>
+            )
           )}
         </Row>
       </div>
@@ -179,15 +192,11 @@ class Homepage extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.product.storeProducts,
-    allProducts: state.product.allProducts,
-    isLoading: state.product.isLoading,
-    authenticated: state.authentication.authenticated,
-    brands: state.brand.storeBrands,
-    categories: state.category.categories,
-  };
-};
+const mapStateToProps = (state) => ({
+  allProducts: state.product.allProducts,
+  isLoading: state.product.isLoading,
+  authenticated: state.authentication.authenticated,
+  categories: state.category.categories,
+});
 
 export default connect(mapStateToProps, actions)(Homepage);

@@ -1,6 +1,6 @@
 // Here you can add other styles
 .body {
-  font-family: 'Public Sans', sans-serif;
+  font-family: 'Outfit';
 }
 
 // homepage .slick-track dispay to flex
@@ -265,14 +265,29 @@
 .aiz-card-box:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+
+  .sliding-text{
+    display: inline-block;
+    padding-left: 0%;
+    animation: slide 10s linear infinite;
+  }
 }
 
 /* Product Image */
 .aiz-card-box img {
-  height: 200px !important;
-  max-height: 200px;
+  height: 100px !important;
+  max-height: 100px;
   margin: 0 auto;
   display: block;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0); /* Start position */
+  }
+  100% {
+    transform: translateX(-100%); /* Slide to left */
+  }
 }
 
 /* Product Name */
@@ -286,7 +301,7 @@
 
 /* Product Price */
 .aiz-card-box .price {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
   color: #A3065F;
   text-align: center;
@@ -474,4 +489,58 @@
     width: 60px;
     height: 60px;
   }
+}
+
+.shimmer-container {
+  position: relative;
+  background: #f0f0f0;
+  overflow: hidden;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.shimmer {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+  background-size: 800px 104px;
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+/* CSS Spinner Styles */
+.spinner {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  animation-delay: -1.0s;
+}
+
+@keyframes sk-bounce {
+  0%, 100% { transform: scale(0.0) }
+  50% { transform: scale(1.0) }
 }
