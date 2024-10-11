@@ -51,7 +51,7 @@ class CategoryShop extends React.PureComponent {
           <meta httpEquiv='pragma' content='no-cache' />
 
           {/* Title */}
-          <title>{`Young Computer Store | Shop ${categoryName}`}</title>
+          <title>`${categoryName}` Laptops, Desktops, Printers & More in Nairobi, Kenya | Young Computer Store</title>
 
           {/* Meta Description */}
           <meta name="description"
