@@ -40,7 +40,7 @@ class CategoryShop extends React.PureComponent {
     return (
       <div className='category-shop'>
         <Helmet>
-          <meta charset="UTF-8" />
+          <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta http-equiv="X-UA-Compatible" content="ie=edge" />
           <link rel="icon" href="/images/favicon2.ico" />
@@ -51,7 +51,7 @@ class CategoryShop extends React.PureComponent {
           <meta httpEquiv='pragma' content='no-cache' />
 
           {/* Title */}
-          <title>`${categoryName}` Laptops, Desktops, Printers & More in Nairobi, Kenya | Young Computer Store</title>
+          <title>{categoryName} Shop in Nairobi, Kenya | Young Computer Store</title>
 
           {/* Meta Description */}
           <meta name="description"

@@ -49,7 +49,7 @@ class BrandsShop extends React.PureComponent {
           <meta httpEquiv='pragma' content='no-cache' />
 
           {/* Title */}
-          <title>{`${brandName} Laptops, Desktops, Printers & More in Nairobi, Kenya | Young Computer Store`}</title>
+          <title>{brandName} Laptops, Desktops, Printers & More in Nairobi, Kenya | Young Computer Store</title>
 
           {/* Meta Description */}
           <meta name="description"
