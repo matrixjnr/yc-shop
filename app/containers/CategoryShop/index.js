@@ -28,9 +28,19 @@ class CategoryShop extends React.PureComponent {
 
   // Function to convert slug to title case
   formatCategoryName(slug) {
-    return slug.split('-')
+    const category = slug.split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
+
+    // CHECK IF CATEGORY NAME IS 'All' AND RETURN 'All Products' INSTEAD
+    // This is to avoid having 'All' as the title of the page, also for best selling, flash sale, today picks, etc.
+    // if the category name contains any of these words, return the category name as is
+    // best laptops, desktops, printers, tablets
+    if (category.toLowerCase().includes('all') || category.toLowerCase().includes('best') || category.toLowerCase().includes('flash') || category.toLowerCase().includes('today')) {
+      return 'The Best Deals on Laptops, Printers, Tablets';
+    }
+
+    return category;
   }
 
   render() {
