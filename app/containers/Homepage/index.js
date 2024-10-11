@@ -8,8 +8,8 @@ import CarouselComponent from "../../components/Common/CategorySlider";
 import FlashSaleComponent from "../../components/Common/FlashSale";
 import FeaturedProductsComponent from "../../components/Common/FeaturedComponent";
 import TodayDeals from "../../components/Common/TodayDeals";
-import { fetchCategories } from "../Category/actions";
 import ShimmerContainer from "../../components/Common/Shimmer";
+
 
 class Homepage extends React.PureComponent {
   componentDidMount() {
