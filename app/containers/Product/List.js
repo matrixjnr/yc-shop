@@ -18,22 +18,23 @@ import NotFound from '../../components/Common/NotFound';
 class List extends React.PureComponent {
   componentDidMount() {
     this.props.fetchProducts();
+    this.props.fetchCategories();
   }
 
   render() {
-    const { history, products, isLoading } = this.props;
+    const { history, products, isLoading, categories } = this.props;
 
     return (
       <>
         <SubPage
-          title='Products'
+          title={`${products.length} Products`}
           actionTitle='Add'
           handleAction={() => history.push('/dashboard/product/add')}
         >
           {isLoading ? (
             <LoadingIndicator inline />
           ) : products.length > 0 ? (
-            <ProductList products={products} />
+            <ProductList products={products} categories={categories} />
           ) : (
             <NotFound message='No products found.' />
           )}
@@ -47,7 +48,8 @@ const mapStateToProps = state => {
   return {
     products: state.product.products,
     isLoading: state.product.isLoading,
-    user: state.account.user
+    user: state.account.user,
+    categories: state.category.categories
   };
 };
 
