@@ -85,7 +85,7 @@ class Contact extends React.PureComponent {
               </p>
               <p>
                 <strong>Phone: </strong>
-                <a href='tel:+254712345678'>+254 712 345 678</a>
+                <a href='tel:+254714420686'>+254 712 345 678</a>
               </p>
             </div>
           </Col>
