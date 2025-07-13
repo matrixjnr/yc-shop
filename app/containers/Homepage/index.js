@@ -106,6 +106,31 @@ class Homepage extends React.PureComponent {
           <CarouselComponent categories={categories} />
         )}
 
+        {/* Hero Image Section */}
+        <div
+          className="hero-banner"
+          style={{
+            width: "100%",
+            height: "400px",
+            backgroundImage: "url('/images/hero.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+            color: "white",
+            paddingLeft: "50px",
+          }}
+        >
+          <div style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", padding: "20px", borderRadius: "10px" }}>
+            <h1 style={{ fontSize: "2.5rem", lineHeight: "1.5" }}>
+              Welcome to <br />
+              Young Computer Systems <br />
+              Your one stop for all things computing
+            </h1>
+          </div>
+        </div>
+          
         {/* Flash Sale Component */}
         {isLoading ? (
           <ShimmerContainer height={400} width="100%" /> // Shimmer placeholder for flash sale
