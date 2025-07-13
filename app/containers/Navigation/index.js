@@ -154,7 +154,7 @@ class Navigation extends React.PureComponent {
               </Col>
               <Col xs='12' className='text-center d-block d-md-none'>
                 <i className='fa fa-phone' />
-                <span> Need advice? Call us 254-714-420-686</span>
+                <span> Need advice? Call us 254-795-670-764</span>
               </Col>
             </Row>
           </Container>
@@ -180,7 +180,12 @@ class Navigation extends React.PureComponent {
                   />
                 )}
                 <Link to='/'>
-                  <h1 className='logo'>Young Computer</h1>
+                 <img
+                      src='/images/LogoYoung.png'
+                      alt='Young Computer Logo'
+                      className='logo-image'
+                      style={{ maxHeight: '30px' }} // adjust size as needed
+                  />
                 </Link>
               </div>
             </Col>
