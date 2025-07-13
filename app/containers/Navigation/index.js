@@ -150,7 +150,7 @@ class Navigation extends React.PureComponent {
               </Col>
               <Col md='4' className='text-center d-none d-md-block'>
                 <i className='fa fa-phone' />
-                <span>Call us <Link to='tel:+254795 670 764' style={{color:"white !important"}}>0714-420-686</Link></span>
+                <span>Call us <Link to='tel:+254795 670 764' style={{color:"white !important"}}>0795-670-764</Link></span>
               </Col>
               <Col xs='12' className='text-center d-block d-md-none'>
                 <i className='fa fa-phone' />
