@@ -184,7 +184,7 @@ class Navigation extends React.PureComponent {
                       src='/images/Logo-Young.png'
                       alt='Young Computer Logo'
                       className='logo-image'
-                      style={{ maxHeight: '30px' }} // adjust size as needed
+                      style={{ maxHeight: '50px' }} // adjust size as needed
                   />
                 </Link>
               </div>
