@@ -107,29 +107,54 @@ class Homepage extends React.PureComponent {
         )}
 
         {/* Hero Image Section */}
-        <div
-          className="hero-banner"
-          style={{
-            width: "100%",
-            height: "400px",
-            backgroundImage: "url('/images/hero.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            color: "white",
-            paddingLeft: "50px",
-          }}
-        >
-          <div style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", padding: "20px", borderRadius: "10px" }}>
-            <h1 style={{ fontSize: "2.5rem", lineHeight: "1.5" }}>
-              Welcome to <br />
-              Young Computer Systems <br />
-              Your one stop for all things computing
-            </h1>
-          </div>
-        </div>
+        <div  className="hero-banner"
+                  style={{
+                    width: "100%",
+                    height: "400px",
+                    backgroundImage: "url('/images/hero.jpg')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "20px",
+                  }}
+                >
+                  <div
+                    style={{
+                      padding: "30px 40px",
+                      borderRadius: "20px",
+                      maxWidth: "800px",
+                      width: "100%",
+                      textAlign: "left",
+                    }}
+                  >
+                    <h1
+                      style={{
+                        color: "#fff",
+                        fontWeight: "700",
+                        fontSize: "2.75rem",
+                        marginBottom: "1rem",
+                        lineHeight: "1.4",
+                      }}
+                    >
+                      Welcome to <br />
+                      Young Computer Systems
+                    </h1>
+                    <p
+                      style={{
+                        color: "#fff",
+                        fontWeight: "400",
+                        fontSize: "1.25rem",
+                        fontFamily: "'Roboto', sans-serif",
+                        margin: 0,
+                      }}
+                    >
+                      Your one stop for all things computing
+                    </p>
+                  </div>
+                </div>
+
           
         {/* Flash Sale Component */}
         {isLoading ? (
