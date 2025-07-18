@@ -157,25 +157,46 @@ class Homepage extends React.PureComponent {
 
           
         {/* Flash Sale Component */}
+     {/* Flash Sale Component */}
         {isLoading ? (
-          <ShimmerContainer height={400} width="100%" /> // Shimmer placeholder for flash sale
+          <ShimmerContainer height={400} width="100%" />
         ) : (
-          <FlashSaleComponent products={flashSaleProducts} />
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "20px",
+              padding: "30px",
+              marginTop: "40px",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+            }}
+          >
+            <FlashSaleComponent products={flashSaleProducts} />
+          </div>
         )}
-
+        
         <Row className="flex-row">
-          {/* Today Top Picks */}
+                {/* Today Top Picks */}
           {isLoading ? (
             <Col xs="12" className="mb-3 mt-5 p-0">
-              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for today deals */}
+              <ShimmerContainer height={300} width="100%" />
             </Col>
           ) : (
             todayTopPicks.length > 0 && (
               <Col xs="12" className="mb-3 mt-5 p-0">
-                <TodayDeals products={todayTopPicks} />
+                <div
+                  style={{
+                    backgroundColor: "#fff",
+                    borderRadius: "20px",
+                    padding: "30px",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <TodayDeals products={todayTopPicks} />
+                </div>
               </Col>
             )
           )}
+        </Row>
 
           {/* On Offer Products */}
           {isLoading ? (
