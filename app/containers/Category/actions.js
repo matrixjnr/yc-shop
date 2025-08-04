@@ -19,7 +19,7 @@ import {
   ADD_CATEGORY,
   REMOVE_CATEGORY,
   SET_CATEGORIES_LOADING,
-  RESET_CATEGORY
+  RESET_CATEGORY, FETCH_CATEGORIES_SELECT
 } from './constants';
 
 import handleError from '../../utils/error';
@@ -95,6 +95,24 @@ export const fetchCategories = () => {
   };
 };
 
+// fetch categories select api
+export const fetchCategoriesSelect = () => {
+  return async (dispatch, getState) => {
+    try {
+      const response = await axios.get(`${API_URL}/category/list/select`);
+
+      response.data.categories = formatSelectOptions(response.data.categories);
+
+      dispatch({
+        type: FETCH_CATEGORIES_SELECT,
+        payload: response.data.categories
+      });
+    } catch (error) {
+      handleError(error, dispatch);
+    }
+  };
+};
+
 // fetch category api
 export const fetchCategory = id => {
   return async (dispatch, getState) => {
@@ -122,7 +140,7 @@ export const addCategory = () => {
       const rules = {
         name: 'required',
         description: 'required|max:200',
-        products: 'required'
+        // products: 'required'
       };
 
       const category = getState().category.categoryFormData;
@@ -138,7 +156,7 @@ export const addCategory = () => {
         'required.description': 'Description is required.',
         'max.description':
           'Description may not be greater than 200 characters.',
-        'required.products': 'Products are required.'
+        // 'required.products': 'Products are required.'
       });
 
       if (!isValid) {
@@ -176,7 +194,7 @@ export const updateCategory = () => {
         name: 'required',
         slug: 'required|alpha_dash',
         description: 'required|max:200',
-        products: 'required'
+        // products: 'required'
       };
 
       const category = getState().category.category;
@@ -196,7 +214,7 @@ export const updateCategory = () => {
         'required.description': 'Description is required.',
         'max.description':
           'Description may not be greater than 200 characters.',
-        'required.products': 'Products are required.'
+        // 'required.products': 'Products are required.'
       });
 
       if (!isValid) {

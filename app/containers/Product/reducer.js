@@ -22,12 +22,13 @@ import {
   FETCH_PRODUCTS_SELECT,
   SET_PRODUCTS_LOADING,
   SET_ADVANCED_FILTERS,
-  RESET_ADVANCED_FILTERS
+  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS, RESET_PRODUCTS
 } from './constants';
 
 const initialState = {
   products: [],
   storeProducts: [],
+  allProducts: [],
   product: {
     _id: ''
   },
@@ -43,6 +44,10 @@ const initialState = {
     isActive: true,
     taxable: { value: 0, label: 'No' },
     brand: {
+      value: 0,
+      label: 'No Options Selected'
+    },
+    category: {
       value: 0,
       label: 'No Options Selected'
     }
@@ -65,7 +70,7 @@ const initialState = {
     totalPages: 1,
     currentPage: 1,
     count: 0,
-    limit: 10
+    limit: 12
   }
 };
 
@@ -96,6 +101,11 @@ const productReducer = (state = initialState, action) => {
         },
         shopFormErrors: {}
       };
+    case FETCH_ALL_PRODUCTS:
+      return {
+        ...state,
+        allProducts: action.payload
+      }
     case SET_PRODUCTS_LOADING:
       return {
         ...state,
@@ -171,6 +181,10 @@ const productReducer = (state = initialState, action) => {
           brand: {
             value: 0,
             label: 'No Options Selected'
+          },
+          category: {
+            value: 0,
+            label: 'No Options Selected'
           }
         },
         product: {
@@ -186,6 +200,11 @@ const productReducer = (state = initialState, action) => {
         },
         shopFormErrors: {}
       };
+    case RESET_PRODUCTS:
+      return {
+        ...state,
+        storeProduct: [],
+      }
     case SET_ADVANCED_FILTERS:
       return {
         ...state,
@@ -208,7 +227,7 @@ const productReducer = (state = initialState, action) => {
           totalPages: 1,
           currentPage: 1,
           count: 0,
-          limit: 10
+          limit: 12
         }
       };
     default:

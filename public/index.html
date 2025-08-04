@@ -1,19 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" href="/images/favicon2.ico" />
-      <!--avoide catche store in browser-->
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
-    <!---->
-    <title>Young Computer Store</title>
-  </head>
-  <body>
-    <noscript> You need to enable JavaScript to run this app. </noscript>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" href="/images/favicon2.ico" />
+
+  <!-- Avoid cache storing in the browser -->
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+
+  <!-- Title -->
+  <title>New and Refurbished Laptops and Desktops in Nairobi, Kenya | Young Computer Store</title>
+
+  <!-- Meta Description -->
+  <meta name="description" content="Young Computer Store - Your best wholesaler for cheap laptops, desktops, and office electronics in Nairobi and Kenya. Shop the best deals on new and refurbished computers!">
+
+  <!-- Meta Keywords -->
+  <meta name="keywords" content="wholesale laptops, wholesale desktops, cheap laptops, new laptops, refurbished laptops, best wholesaler in Nairobi, best wholesaler in Kenya, electronics, office electronics, computer store">
+
+  <!-- Open Graph tags for social media -->
+  <meta property="og:title" content="Young Computer Store" />
+  <meta property="og:description" content="Shop the best deals on laptops and desktops at Young Computer Store, the leading wholesaler in Nairobi." />
+  <meta property="og:image" content="URL to an image for social sharing" />
+  <meta property="og:url" content="https://youngcomputers.co.ke" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Card tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Young Computer Store" />
+  <meta name="twitter:description" content="Find cheap wholesale laptops and desktops at Young Computer Store, your best choice in Nairobi." />
+  <meta name="twitter:image" content="URL to an image for Twitter sharing" />
+</head>
+<body>
+<noscript> You need to enable JavaScript to run this app. </noscript>
+<script>
+  var url = 'https://wati-integration-prod-service.clare.ai/v2/watiWidget.js?77416';
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = url;
+  var options = {
+    "enabled":true,
+    "chatButtonSetting":{
+      "backgroundColor":"#a3065f",
+      "ctaText":"Chat with us",
+      "borderRadius":"25",
+      "marginLeft": "0",
+      "marginRight": "20",
+      "marginBottom": "20",
+      "ctaIconWATI":true,
+      "position":"right"
+    },
+    "brandSetting":{
+      "brandName":"Young Computers",
+      "brandSubTitle":"undefined",
+      "brandImg":"https://www.wati.io/wp-content/uploads/2023/04/Wati-logo.svg",
+      "welcomeText":"Hi there!\nHow can I help you?",
+      "messageText":"Hello, %0A I have a question about {{page_link}}",
+      "backgroundColor":"#a3065f",
+      "ctaText":"Chat with us",
+      "borderRadius":"25",
+      "autoShow":false,
+      "phoneNumber":"254795430136/ 254714421236"
+    }
+  };
+  s.onload = function() {
+    CreateWhatsappChatWidget(options);
+  };
+  var x = document.getElementsByTagName('script')[0];
+  x.parentNode.insertBefore(s, x);
+</script>
+<div id="root"></div>
+</body>
 </html>
+

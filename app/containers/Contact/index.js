@@ -74,6 +74,21 @@ class Contact extends React.PureComponent {
           <div className='contact-actions'>
             <Button type='submit' text='Submit' />
           </div>
+          <Col xs='12' md='12'>
+            <div className='container-fluid mt-5'>
+              <h3 className='text-uppercase'>Or write to us directly</h3>
+              <p>
+                <strong>Email: </strong>
+                <a href='mailto:info@youngcomputers.co.ke'>
+                  info@youngcomputers.co.ke
+                </a>
+              </p>
+              <p>
+                <strong>Phone: </strong>
+                <a href='tel:+254714420686'>+254 714 420 686</a>
+              </p>
+            </div>
+          </Col>
         </form>
       </div>
     );

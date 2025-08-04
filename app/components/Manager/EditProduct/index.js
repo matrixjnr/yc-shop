@@ -6,18 +6,19 @@
 
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-import { Row, Col } from 'reactstrap';
+import {Link} from 'react-router-dom';
+import {Row, Col} from 'reactstrap';
 
-import { ROLES } from '../../../constants';
+import {ROLES} from '../../../constants';
 import Input from '../../Common/Input';
 import Switch from '../../Common/Switch';
 import Button from '../../Common/Button';
 import SelectOption from '../../Common/SelectOption';
+import Editor from 'react-simple-wysiwyg';
 
 const taxableSelect = [
-  { value: 1, label: 'Yes' },
-  { value: 0, label: 'No' }
+  {value: 1, label: 'Yes'},
+  {value: 0, label: 'No'}
 ];
 
 const EditProduct = props => {
@@ -27,6 +28,7 @@ const EditProduct = props => {
     productChange,
     formErrors,
     brands,
+    categories,
     updateProduct,
     deleteProduct,
     activateProduct
@@ -39,6 +41,7 @@ const EditProduct = props => {
 
   return (
     <div className='edit-product'>
+      {console.log('EditProduct props', props)}
       <div className='d-flex flex-row mx-0 mb-3'>
         <label className='mr-1'>Product link </label>
         <Link to={`/product/${product.slug}`} className='default-link'>
@@ -88,15 +91,11 @@ const EditProduct = props => {
             />
           </Col>
           <Col xs='12' md='12'>
-            <Input
-              type={'textarea'}
-              error={formErrors['description']}
-              label={'Description'}
-              name={'description'}
-              placeholder={'Product Description'}
+            <h6>Description</h6>
+            <Editor
               value={product.description}
-              onInputChange={(name, value) => {
-                productChange(name, value);
+              onChange={e => {
+                productChange('description', e.target.value);
               }}
             />
           </Col>
@@ -142,18 +141,41 @@ const EditProduct = props => {
             />
           </Col>
           {user.role === ROLES.Admin && (
-            <Col xs='12' md='12'>
-              <SelectOption
-                error={formErrors['brand']}
-                label={'Select Brand'}
-                multi={false}
-                value={product.brand}
-                options={brands}
-                handleSelectChange={value => {
-                  productChange('brand', value);
-                }}
-              />
-            </Col>
+            <>
+              <Col xs='12' md='12'>
+                <SelectOption
+                  error={formErrors['brand']}
+                  label={'Select Brand'}
+                  multi={false}
+                  value={product.brand}
+                  options={brands}
+                  handleSelectChange={value => {
+                    productChange('brand', value);
+                  }}
+                />
+              </Col>
+              <Col xs='12' md='12'>
+                <SelectOption
+                  error={formErrors['categories']}
+                  label={'Select Category'}
+                  multi={true}
+                  // Mapping product categories to format compatible with SelectOption
+                  value={product.categories.map(category => ({
+                    value: category._id,
+                    label: category.name,
+                  }))}
+                  options={categories}
+                  handleSelectChange={selectedCategories => {
+                    // Updating the product's categories to match the selected values
+                    const updatedCategories = selectedCategories.map(option => ({
+                      _id: option.value,
+                      name: option.label,
+                    }));
+                    productChange('categories', updatedCategories);
+                  }}
+                />
+              </Col>
+            </>
           )}
           <Col xs='12' md='12' className='mt-3 mb-2'>
             <Switch
@@ -166,9 +188,37 @@ const EditProduct = props => {
                 activateProduct(product._id, value);
               }}
             />
+            <Switch md='12' className='my-2'
+                    id={'featured-product'}
+                    name={'featured'}
+                    label={'Featured?'}
+                    checked={product.featured}
+                    toggleCheckboxChange={value => productChange('featured', value)}
+            />
+            <Switch md='12' className='my-2'
+                    id={'onOffer-product'}
+                    name={'onOffer'}
+                    label={'On Offer?'}
+                    checked={product.onOffer}
+                    toggleCheckboxChange={value => productChange('onOffer', value)}
+            />
+            {product?.onOffer && (
+              <Input
+                type={'number'}
+                error={formErrors['offerPrice']}
+                label={'Offer Price'}
+                name={'offerPrice'}
+                min={1}
+                placeholder={'Product Offer Price'}
+                value={product?.offerPrice}
+                onInputChange={(name, value) => {
+                  productChange(name, value);
+                }}
+              />
+            )}
           </Col>
         </Row>
-        <hr />
+        <hr/>
         <div className='d-flex flex-column flex-md-row'>
           <Button
             type='submit'

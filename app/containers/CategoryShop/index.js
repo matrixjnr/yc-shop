@@ -6,9 +6,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { Helmet } from "react-helmet"; // Import Helmet for managing meta tags
 
 import actions from '../../actions';
-
 import ProductList from '../../components/Store/ProductList';
 import NotFound from '../../components/Common/NotFound';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
@@ -26,11 +26,64 @@ class CategoryShop extends React.PureComponent {
     }
   }
 
+  // Function to convert slug to title case
+  formatCategoryName(slug) {
+    const category = slug.split('-')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+
+    // CHECK IF CATEGORY NAME IS 'All' AND RETURN 'All Products' INSTEAD
+    // This is to avoid having 'All' as the title of the page, also for best selling, flash sale, today picks, etc.
+    // if the category name contains any of these words, return the category name as is
+    // best laptops, desktops, printers, tablets
+    if (category.toLowerCase().includes('all') || category.toLowerCase().includes('best') || category.toLowerCase().includes('flash') || category.toLowerCase().includes('today')) {
+      return 'The Best Deals on Laptops, Printers, Tablets';
+    }
+
+    return category;
+  }
+
   render() {
     const { products, isLoading, authenticated, updateWishlist } = this.props;
+    const categoryName = this.formatCategoryName(this.props.match.params.slug); // Convert slug to title case
 
     return (
       <div className='category-shop'>
+        <Helmet>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+          <link rel="icon" href="/images/favicon2.ico" />
+
+          {/* Avoid cache storing in the browser */}
+          <meta httpEquiv='cache-control' content='no-cache' />
+          <meta httpEquiv='expires' content='0' />
+          <meta httpEquiv='pragma' content='no-cache' />
+
+          {/* Title */}
+          <title>{categoryName} Shop in Nairobi, Kenya | Young Computer Store</title>
+
+          {/* Meta Description */}
+          <meta name="description"
+                content={`Explore a wide range of ${categoryName} at Young Computer Store, your go-to shop for affordable electronics in Nairobi, Kenya.`} />
+
+          {/* Meta Keywords */}
+          <meta name="keywords"
+                content={`wholesale ${categoryName}, affordable ${categoryName}, electronics, laptops, desktops, printers, tablets, Young Computer Store, Nairobi`} />
+
+          {/* Open Graph tags for social media */}
+          <meta property="og:title" content={`Young Computer Store - ${categoryName}`} />
+          <meta property="og:description" content={`Shop the best deals on ${categoryName} at Young Computer Store, the leading electronics wholesaler in Nairobi.`} />
+          <meta property="og:image" content="URL to an image for social sharing" />
+          <meta property="og:url" content="https://youngcomputers.co.ke" />
+          <meta property="og:type" content="website" />
+
+          {/* Twitter Card tags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={`Young Computer Store - ${categoryName}`} />
+          <meta name="twitter:description" content={`Find great deals on ${categoryName} at Young Computer Store, your top choice in Nairobi.`} />
+          <meta name="twitter:image" content="URL to an image for Twitter sharing" />
+        </Helmet>
         {isLoading && <LoadingIndicator />}
         {products && products.length > 0 && (
           <ProductList

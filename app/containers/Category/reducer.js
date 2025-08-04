@@ -8,6 +8,7 @@ import {
   FETCH_CATEGORIES,
   FETCH_STORE_CATEGORIES,
   FETCH_CATEGORY,
+  FETCH_CATEGORIES_SELECT,
   CATEGORY_CHANGE,
   CATEGORY_EDIT_CHANGE,
   SET_CATEGORY_FORM_ERRORS,
@@ -24,6 +25,7 @@ const initialState = {
   category: {
     _id: ''
   },
+  categoriesSelect: [],
   categoryFormData: {
     name: '',
     description: '',
@@ -51,6 +53,11 @@ const categoryReducer = (state = initialState, action) => {
       return {
         ...state,
         category: action.payload
+      };
+    case FETCH_CATEGORIES_SELECT:
+      return {
+        ...state,
+        categoriesSelect: action.payload
       };
     case ADD_CATEGORY:
       return {

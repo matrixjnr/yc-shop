@@ -6,9 +6,9 @@ export const API_URL =
 console.log(process.env.API_URL, process.env.DEV_API_URL, API_URL, process.env.REACT_APP_API_URL)
 
 export const SOCKET_URL =
-  window.location.host.indexOf('localhost') >= 0
-    ? 'http://127.0.0.1:3050'
-    : window.location.host;
+  window.location.host.indexOf('https://youngcomputers.co.ke') >= 0
+  ? process.env.REACT_APP_API_URL
+  : process.env.REACT_APP_API_URL;
 
 export const ROLES = {
   Admin: 'ROLE ADMIN',

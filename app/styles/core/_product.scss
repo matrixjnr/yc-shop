@@ -2,8 +2,8 @@
 .product-dashboard {
   .p-list {
     .product-box {
-      height: 100px;
-      max-height: 100px;
+      height: 150px;
+      max-height: 150px;
       border-radius: $border-radius-default;
       box-shadow: $box-shadow-secondary;
       @include transition();
@@ -13,16 +13,23 @@
         @include transition();
       }
 
+      .pname > h4 {
+        margin-top: 10px;
+      }
+
       .item-image {
-        width: 120px;
-        min-width: 120px;
-        height: 100px;
+        width: 150px;
+        min-width: 150px;
+        height: 150px;
         object-fit: cover;
         border-radius: $border-radius-default;
       }
 
       .product-desc {
         @include text-ellipsis(2);
+        height: 80px;
+        max-height: 100px;
+        overflow-y: scroll;
       }
     }
   }

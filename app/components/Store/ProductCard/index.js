@@ -46,7 +46,7 @@ const ProductCard = ({ product, updateWishlist, authenticated }) => {
                 </div>
               </div>
               <div className='d-flex flex-row justify-content-between align-items-center px-4 mb-2 item-footer'>
-                <p className='price mb-0'>{formatMoney(product.price)}</p>
+                <p className='price mb-0'>{formatMoney(product.onOffer ? product.offerPrice : product.price)}</p>
                 {product.totalReviews > 0 && (
                   <p className='mb-0'>
                     <span className='mr-1'>

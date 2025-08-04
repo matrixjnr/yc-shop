@@ -15,7 +15,7 @@ import Input from '../../components/Common/Input';
 import Button from '../../components/Common/Button';
 import LoadingIndicator from '../../components/Common/LoadingIndicator';
 import NotFound from '../../components/Common/NotFound';
-import { BagIcon } from '../../components/Common/Icon';
+import {BagIcon, WhatsappIcon} from '../../components/Common/Icon';
 import ProductReviews from '../../components/Store/ProductReviews';
 import SocialShare from '../../components/Store/SocialShare';
 
@@ -55,6 +55,8 @@ class ProductPage extends React.PureComponent {
       reviewChange,
       reviewFormErrors
     } = this.props;
+
+    const orderMessageOnWhatsapp = `Hello, I would like to order the following product: ${product.name} with the quantity of ${productShopData.quantity}. Here is the link to the product: ${window.location.protocol !== 'https' ? 'http' : 'https'}://${window.location.host}/product/${product.slug}. Please let me know if it is available.`;
 
     return (
       <div className='product-shop'>
@@ -100,7 +102,10 @@ class ProductPage extends React.PureComponent {
                           </Link>
                         </p>
                       )}
-                      <p className='item-desc'>{product.description}</p>
+                      <div className='item-desc'
+                          dangerouslySetInnerHTML={{
+                            __html: product.description
+                          }}></div>
                       <p className='price'>KSh {product.price}</p>
                     </div>
                     <div className='item-customize'>
@@ -150,6 +155,23 @@ class ProductPage extends React.PureComponent {
                           onClick={() => handleAddToCart(product)}
                         />
                       )}
+                    </div>
+                    <div className='item-actions'>
+                      <Button
+                        variant='primary'
+                        disabled={
+                          product.quantity <= 0 && !shopFormErrors['quantity']
+                        }
+                        text='Order on WhatsApp'
+                        className='whatsapp-btn'
+                        icon={<WhatsappIcon />}
+                        onClick={() =>
+                          window.open(
+                            `https://wa.me/254714420686?text=${orderMessageOnWhatsapp}`,
+                            '_blank'
+                          )
+                        }
+                      />
                     </div>
                   </div>
                 </div>

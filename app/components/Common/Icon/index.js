@@ -23,6 +23,15 @@ const BagIcon = () => {
   );
 };
 
+// create a whatsapp icon svg
+const WhatsappIcon = () => {
+  return (
+    <div className='whatsapp-icon'>
+      <i className='order-whatsapp fa fa-whatsapp'></i>
+    </div>
+  );
+}
+
 const BarsIcon = () => {
   return <span className='bars-icon fa fa-bars' aria-hidden='true' />;
 };
@@ -371,5 +380,6 @@ export {
   TrashIcon,
   HeartIcon,
   XIcon,
-  ArrowBackIcon
+  ArrowBackIcon,
+  WhatsappIcon
 };
