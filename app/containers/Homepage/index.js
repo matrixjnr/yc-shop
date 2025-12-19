@@ -10,12 +10,10 @@ import FeaturedProductsComponent from "../../components/Common/FeaturedComponent
 import TodayDeals from "../../components/Common/TodayDeals";
 import ShimmerContainer from "../../components/Common/Shimmer";
 
-
 class Homepage extends React.PureComponent {
   componentDidMount() {
     const { fetchAllProducts, fetchCategories } = this.props;
 
-    // Fetch all necessary data at once to reduce separate requests
     Promise.all([fetchAllProducts(), fetchCategories()])
       .then(() => {
         console.log("All data loaded successfully.");
@@ -98,63 +96,139 @@ class Homepage extends React.PureComponent {
     };
 
     return (
-      <div className="homepage">
-        {/* Carousel Component */}
+      <div className="homepage" style={{ backgroundColor: "#f9f9f9", paddingBottom: "40px" }}>
         {isLoading ? (
-          <ShimmerContainer height={300} width="100%" /> // Shimmer placeholder
+          <ShimmerContainer height={300} width="100%" />
         ) : (
           <CarouselComponent categories={categories} />
         )}
 
-        {/* Flash Sale Component */}
+        <div
+          className="hero-banner"
+          style={{
+            width: "100%",
+            height: "400px",
+            backgroundImage: "url('/images/hero.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "20px",
+            borderRadius: "20px",
+            marginTop: "30px",
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+          }}
+        >
+          <div
+            style={{
+              padding: "30px 40px",
+              borderRadius: "20px",
+              maxWidth: "800px",
+              width: "100%",
+              textAlign: "left",
+            }}
+          >
+            <h1
+              style={{
+                color: "#fff",
+                fontWeight: "700",
+                fontSize: "3.5rem",
+                marginBottom: "1rem",
+                lineHeight: "1.4",
+              }}
+            >
+              <span style={{ color: "#fff", fontSize: "2rem", fontWeight: "500", marginBottom: "0.5rem", lineHeight: "1.4"}}>Welcome to</span><br />
+              <span style={{ color: "#fff", fontSize: "3.5rem", fontWeight: "600", marginBottom: "1rem"}}>Young Computer Systems</span>
+            </h1>
+            <p
+              style={{
+                color: "#fff",
+                fontWeight: "400",
+                fontSize: "1.25rem",
+                fontFamily: "'Comic Sans MS', cursive, sans-serif",
+                margin: 0,
+              }}
+            >
+              Your one stop for all things computing
+            </p>
+          </div>
+        </div>
+
         {isLoading ? (
-          <ShimmerContainer height={400} width="100%" /> // Shimmer placeholder for flash sale
+          <ShimmerContainer height={400} width="100%" />
         ) : (
-          <FlashSaleComponent products={flashSaleProducts} />
+          <div
+            style={{
+              backgroundColor: "#fff",
+              borderRadius: "20px",
+              padding: "30px",
+              marginTop: "40px",
+              marginBottom: "20px",
+              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+            }}
+          >
+            <FlashSaleComponent products={flashSaleProducts} />
+          </div>
         )}
 
         <Row className="flex-row">
-          {/* Today Top Picks */}
           {isLoading ? (
             <Col xs="12" className="mb-3 mt-5 p-0">
-              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for today deals */}
+              <ShimmerContainer height={300} width="100%" />
             </Col>
           ) : (
             todayTopPicks.length > 0 && (
               <Col xs="12" className="mb-3 mt-5 p-0">
-                <TodayDeals products={todayTopPicks} />
+                <div
+                  style={{
+                    backgroundColor: "#fff",
+                    borderRadius: "20px",
+                    padding: "30px",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+                  }}
+                >
+                  <TodayDeals products={todayTopPicks} />
+                </div>
               </Col>
             )
           )}
 
-          {/* On Offer Products */}
           {isLoading ? (
             <Col xs="12" className="mb-3 mt-4">
-              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for on offer */}
+              <ShimmerContainer height={300} width="100%" />
             </Col>
           ) : (
             onOfferProducts.length > 0 && (
               <Col xs="12" className="mb-3 mt-4">
-                <h2>On Offer</h2>
-                <Slider {...sliderSettings}>
-                  {onOfferProducts.map((item, index) => (
-                    <div key={index} className="product-list home-list w-90">
-                      <ProductCard
-                        product={item}
-                        updateWishlist={updateWishlist}
-                        authenticated={authenticated}
-                      />
-                    </div>
-                  ))}
-                </Slider>
+                <h2 style={{ fontWeight: 700, fontSize: "1.75rem" }}>On Offer</h2>
+                <div
+                  style={{
+                    backgroundColor: "#fff",
+                    borderRadius: "20px",
+                    padding: "20px",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <Slider {...sliderSettings}>
+                    {onOfferProducts.map((item, index) => (
+                      <div key={index} className="product-list home-list w-90">
+                        <ProductCard
+                          product={item}
+                          updateWishlist={updateWishlist}
+                          authenticated={authenticated}
+                        />
+                      </div>
+                    ))}
+                  </Slider>
+                </div>
               </Col>
             )
           )}
 
-          {/* Featured Products */}
           {isLoading ? (
             <Col xs="12" className="mb-3 mt-5">
-              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for featured products */}
+              <ShimmerContainer height={300} width="100%" />
             </Col>
           ) : (
             featuredProducts.length > 0 && (
@@ -169,16 +243,15 @@ class Homepage extends React.PureComponent {
             )
           )}
 
-          {/* Best Sellers */}
           {isLoading ? (
             <Col xs="12" className="mb-3 mt-5">
-              <ShimmerContainer height={300} width="100%" /> {/* Shimmer for best sellers */}
+              <ShimmerContainer height={300} width="100%" />
             </Col>
           ) : (
             bestSellers.length > 0 && (
               <Col xs="12" className="mb-3 mt-5">
                 <FeaturedProductsComponent
-                  products={bestSellers} // Use `bestSellers` instead of `featuredProducts`
+                  products={bestSellers}
                   title="Best Selling Products"
                   updateWishlist={updateWishlist}
                   authenticated={authenticated}
