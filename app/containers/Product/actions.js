@@ -222,7 +222,7 @@ export const fetchAllProducts = () => {
 
       dispatch({
         type: FETCH_ALL_PRODUCTS,
-        payload: response.data.products
+        payload: Array.isArray(response.data.products) ? response.data.products : []
       });
     } catch (error) {
       handleError(error, dispatch);

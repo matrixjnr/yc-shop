@@ -32,23 +32,26 @@ class Homepage extends React.PureComponent {
       categories,
     } = this.props;
 
-    const onOfferProducts = allProducts.filter((product) => product.onOffer);
-    const featuredProducts = allProducts.filter((product) => product.featured);
-    const todayTopPicks = allProducts.filter(
+    const safeProducts = Array.isArray(allProducts) ? allProducts : [];
+    const safeCategories = Array.isArray(categories) ? categories : [];
+
+    const onOfferProducts = safeProducts.filter((product) => product.onOffer);
+    const featuredProducts = safeProducts.filter((product) => product.featured);
+    const todayTopPicks = safeProducts.filter(
       (product) =>
         product.categories &&
         product.categories.some((category) =>
           category.name.trim().toLowerCase().includes("today")
         )
     );
-    const flashSaleProducts = allProducts.filter(
+    const flashSaleProducts = safeProducts.filter(
       (product) =>
         product.categories &&
         product.categories.some((category) =>
           category.name.trim().toLowerCase().includes("flash")
         )
     );
-    const bestSellers = allProducts.filter(
+    const bestSellers = safeProducts.filter(
       (product) =>
         product.categories &&
         product.categories.some((category) =>
@@ -100,7 +103,7 @@ class Homepage extends React.PureComponent {
         {isLoading ? (
           <ShimmerContainer height={300} width="100%" />
         ) : (
-          <CarouselComponent categories={categories} />
+          <CarouselComponent categories={safeCategories} />
         )}
 
         <div

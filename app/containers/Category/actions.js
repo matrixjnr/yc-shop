@@ -68,7 +68,7 @@ export const fetchStoreCategories = () => {
 
       dispatch({
         type: FETCH_STORE_CATEGORIES,
-        payload: response.data.categories
+        payload: Array.isArray(response.data.categories) ? response.data.categories : []
       });
     } catch (error) {
       handleError(error, dispatch);
@@ -85,7 +85,7 @@ export const fetchCategories = () => {
 
       dispatch({
         type: FETCH_CATEGORIES,
-        payload: response.data.categories
+        payload: Array.isArray(response.data.categories) ? response.data.categories : []
       });
     } catch (error) {
       handleError(error, dispatch);

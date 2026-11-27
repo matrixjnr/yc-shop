@@ -12,7 +12,8 @@ const common = require('./webpack.common');
 const CURRENT_WORKING_DIR = process.cwd();
 const NODE_ENV = process.env.NODE_ENV;
 const API_URL = process.env.API_URL;
-const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_API_URL =
+  process.env.REACT_APP_API_URL || 'https://api.youngcomputers.co.ke/api';
 const REACT_APP_API_URL_DEV = process.env.REACT_APP_API_URL_DEV;
 
 const config = {
