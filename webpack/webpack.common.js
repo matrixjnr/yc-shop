@@ -21,10 +21,14 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: 'public'
-      }
-    ])
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: 'public',
+          // HtmlWebpackPlugin generates index.html from the template.
+          globOptions: {ignore: ['**/index.html']}
+        }
+      ]
+    })
   ]
 };

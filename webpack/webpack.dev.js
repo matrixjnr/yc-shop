@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpackMerge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 
 const common = require('./webpack.common');
@@ -21,16 +21,26 @@ const config = {
         use: [
           'style-loader',
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
+            options: {
+              url: {filter: url => !url.startsWith('/')}
+            }
           },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('autoprefixer')]
+              postcssOptions: {
+                plugins: [require('autoprefixer')()]
+              }
             }
           },
           {
-            loader: 'sass-loader'
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                loadPaths: [path.join(CURRENT_WORKING_DIR, 'node_modules')]
+              }
+            }
           }
         ]
       },
@@ -70,13 +80,12 @@ const config = {
   devServer: {
     port: 7070,
     open: false,
-    inline: true,
     compress: true,
     hot: true,
-    disableHostCheck: false,
+    allowedHosts: 'all',
     historyApiFallback: true
   },
   devtool: 'eval-source-map'
 };
 
-module.exports = webpackMerge(common, config);
+module.exports = merge(common, config);

@@ -4,9 +4,8 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const webpackMerge = require('webpack-merge');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const {merge} = require('webpack-merge');
 
 const common = require('./webpack.common');
 
@@ -21,15 +20,14 @@ const config = {
   devServer: {
     port: 7070,
     open: true,
-    inline: true,
     compress: true,
     hot: true,
-    disableHostCheck: false,
+    allowedHosts: 'all',
     historyApiFallback: true
   },
   output: {
     path: path.join(CURRENT_WORKING_DIR, '/dist'),
-    filename: 'js/[name].[hash].js',
+    filename: 'js/[name].[contenthash].js',
     publicPath: '/'
   },
   module: {
@@ -39,16 +37,27 @@ const config = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader'
+            loader: 'css-loader',
+            options: {
+              // Leave root-relative URLs (served from /public) as-is.
+              url: {filter: url => !url.startsWith('/')}
+            }
           },
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [require('cssnano'), require('autoprefixer')]
+              postcssOptions: {
+                plugins: [require('autoprefixer')()]
+              }
             }
           },
           {
-            loader: 'sass-loader'
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                loadPaths: [path.join(CURRENT_WORKING_DIR, 'node_modules')]
+              }
+            }
           }
         ]
       },
@@ -109,18 +118,17 @@ const config = {
     minimizer: [
       new TerserPlugin({
         terserOptions: {
-          warnings: false,
           compress: {
             comparisons: false
           },
-          parse: {},
           mangle: true,
-          output: {
+          format: {
             comments: false,
             ascii_only: true
           }
         }
-      })
+      }),
+      new CssMinimizerPlugin()
     ]
   },
   plugins: [
@@ -149,39 +157,9 @@ const config = {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css'
-    }),
-    new WebpackPwaManifest({
-      name: 'Young Computer Store',
-      short_name: 'Young ComputerStore',
-      description: 'Young Computer Store!',
-      background_color: '#fff',
-      theme_color: '#4a68aa',
-      inject: true,
-      ios: true,
-      icons: [
-        {
-          src: path.resolve('public/images/pwa.png'),
-          destination: 'images',
-          sizes: [72, 96, 128, 144, 192, 384, 512]
-        },
-        {
-          src: path.resolve('public/images/pwa.png'),
-          sizes: [120, 152, 167, 180],
-          destination: 'images',
-          ios: true
-        }
-      ]
-    }),
-    new OptimizeCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }]
-      },
-      canPrint: true
+      filename: 'css/[name].[contenthash].css'
     })
   ]
 };
 
-module.exports = webpackMerge(common, config);
+module.exports = merge(common, config);
