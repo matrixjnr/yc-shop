@@ -9,8 +9,7 @@
 
   .react-bootstrap-table {
     .table {
-      overflow-x: scroll;
-      display: block;
+      width: 100%;
       margin: 20px 0px;
       color: $font-custom-color;
 
@@ -19,8 +18,134 @@
         white-space: nowrap;
         text-overflow: unset;
         overflow-wrap: break-word;
-        width: 100%;
       }
     }
+  }
+}
+
+.admin-table {
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-table-head,
+.admin-table-row {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) minmax(140px, 1.4fr) 110px 80px 90px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.admin-table-head {
+  background: #f8f9fa;
+  color: #6c757d;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.admin-table-row {
+  border-top: 1px solid #eef0f2;
+  color: inherit;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #faf7f9;
+    text-decoration: none;
+  }
+}
+
+.admin-table-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+
+  img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #f8f9fa;
+    flex-shrink: 0;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.admin-table-cell {
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-table-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: #6c757d;
+  border-top: 1px solid #eef0f2;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-active {
+  background: #e7f7ee;
+  color: #1a7f4b;
+}
+
+.status-inactive {
+  background: #f1f3f5;
+  color: #6c757d;
+}
+
+.admin-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+
+  .active {
+    background: $primary;
+    color: #fff;
+    border-color: $primary;
+  }
+}
+
+.admin-table-meta {
+  margin-top: 8px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .admin-table-head {
+    display: none;
+  }
+
+  .admin-table-row {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+
+  .admin-table-product {
+    grid-column: 1 / -1;
   }
 }

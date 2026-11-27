@@ -164,11 +164,9 @@ class Homepage extends React.PureComponent {
           <div
             style={{
               backgroundColor: "#fff",
-              borderRadius: "20px",
               padding: "30px",
               marginTop: "40px",
               marginBottom: "20px",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
             }}
           >
             <FlashSaleComponent products={flashSaleProducts} />
@@ -186,9 +184,7 @@ class Homepage extends React.PureComponent {
                 <div
                   style={{
                     backgroundColor: "#fff",
-                    borderRadius: "20px",
                     padding: "30px",
-                    boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
                   }}
                 >
                   <TodayDeals products={todayTopPicks} />
@@ -208,9 +204,7 @@ class Homepage extends React.PureComponent {
                 <div
                   style={{
                     backgroundColor: "#fff",
-                    borderRadius: "20px",
                     padding: "20px",
-                    boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
                   }}
                 >
                   <Slider {...sliderSettings}>
