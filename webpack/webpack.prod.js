@@ -64,29 +64,19 @@ const config = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'images',
-              publicPath: '../images',
-              name: '[name].[hash].[ext]'
-            }
-          }
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name].[contenthash][ext]',
+          publicPath: '/'
+        }
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'fonts',
-              publicPath: '../fonts',
-              name: '[name].[hash].[ext]'
-            }
-          }
-        ]
+        test: /\.(woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[contenthash][ext]',
+          publicPath: '/'
+        }
       }
     ]
   },

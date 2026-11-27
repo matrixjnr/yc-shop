@@ -99,7 +99,7 @@ class Homepage extends React.PureComponent {
     };
 
     return (
-      <div className="homepage" style={{ backgroundColor: "#f9f9f9", paddingBottom: "40px" }}>
+      <div className="homepage">
         {isLoading ? (
           <ShimmerContainer height={300} width="100%" />
         ) : (

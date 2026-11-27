@@ -46,27 +46,19 @@ const config = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'images',
-              name: '[name].[ext]'
-            }
-          }
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
+          publicPath: '/'
+        }
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'fonts',
-              name: '[name].[ext]'
-            }
-          }
-        ]
+        test: /\.(woff2?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]',
+          publicPath: '/'
+        }
       }
     ]
   },

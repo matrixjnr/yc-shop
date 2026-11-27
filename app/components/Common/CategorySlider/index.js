@@ -53,7 +53,7 @@ const CarouselComponent = ({categories}) => {
       if (lowerCaseName.includes("new")) {
         return "https://www.kindpng.com/picc/m/357-3573039_desktop-computer-pc-clipart-hd-png-download.png"; // New desktop image URL
       } else if (lowerCaseName.includes("ex-uk")) {
-        return "https://images.all-free-download.com/images/thumbjpg/computer_311799.jpg"; // Ex-UK desktop image URL
+        return "https://www.kindpng.com/picc/m/357-3573039_desktop-computer-pc-clipart-hd-png-download.png"; // Ex-UK desktop image URL
       }
       return "https://image.similarpng.com/very-thumbnail/2021/09/Desktop-computer-on-transparent-background-PNG.png"; // General desktop image URL
     }
