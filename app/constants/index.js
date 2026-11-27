@@ -3,8 +3,6 @@ export const API_URL =
     ? process.env.REACT_APP_API_URL
     : process.env.REACT_APP_API_URL_DEV;
 
-console.log('API_URL', API_URL);
-
 export const SOCKET_URL =
   window.location.host.indexOf('https://youngcomputers.co.ke') >= 0
   ? process.env.REACT_APP_API_URL

@@ -21,6 +21,7 @@ export const RESET_PRODUCT = 'src/Product/RESET_PRODUCT';
 export const RESET_PRODUCT_SHOP = 'src/Product/RESET_PRODUCT_SHOP';
 export const ADD_PRODUCT = 'src/Product/ADD_PRODUCT';
 export const REMOVE_PRODUCT = 'src/Product/REMOVE_PRODUCT';
+export const UPDATE_PRODUCT_IMAGE = 'src/Product/UPDATE_PRODUCT_IMAGE';
 export const FETCH_PRODUCTS_SELECT = 'src/Product/FETCH_PRODUCTS_SELECT';
 export const SET_PRODUCTS_LOADING = 'src/Product/SET_PRODUCTS_LOADING';
 export const SET_ADVANCED_FILTERS = 'src/Product/SET_ADVANCED_FILTERS';

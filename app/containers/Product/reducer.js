@@ -22,7 +22,7 @@ import {
   FETCH_PRODUCTS_SELECT,
   SET_PRODUCTS_LOADING,
   SET_ADVANCED_FILTERS,
-  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS, RESET_PRODUCTS
+  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS, RESET_PRODUCTS, UPDATE_PRODUCT_IMAGE
 } from './constants';
 
 const initialState = {
@@ -40,7 +40,7 @@ const initialState = {
     description: '',
     quantity: 1,
     price: 1,
-    image: {},
+    image: null,
     isActive: true,
     taxable: { value: 0, label: 'No' },
     brand: {
@@ -143,6 +143,15 @@ const productReducer = (state = initialState, action) => {
           ...action.payload
         }
       };
+    case UPDATE_PRODUCT_IMAGE:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          imageUrl: action.payload.imageUrl,
+          imageKey: action.payload.imageKey
+        }
+      };
     case PRODUCT_SHOP_CHANGE:
       return {
         ...state,
@@ -175,7 +184,7 @@ const productReducer = (state = initialState, action) => {
           description: '',
           quantity: 1,
           price: 1,
-          image: {},
+          image: null,
           isActive: true,
           taxable: { value: 0, label: 'No' },
           brand: {

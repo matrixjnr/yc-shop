@@ -42,7 +42,8 @@ class Edit extends React.PureComponent {
       productEditChange,
       updateProduct,
       deleteProduct,
-      activateProduct
+      activateProduct,
+      removeProductImage
     } = this.props;
 
     return (
@@ -62,6 +63,7 @@ class Edit extends React.PureComponent {
             updateProduct={updateProduct}
             deleteProduct={deleteProduct}
             activateProduct={activateProduct}
+            removeProductImage={removeProductImage}
           />
         ) : (
           <NotFound message='No product found.' />

@@ -12,6 +12,8 @@ const taxableSelect = [
   { value: 0, label: 'No' }
 ];
 
+const IMAGE_ACCEPT = 'image/jpeg,image/png,image/webp,image/gif';
+
 const AddProduct = (props) => {
   const {
     user,
@@ -20,8 +22,7 @@ const AddProduct = (props) => {
     productChange,
     addProduct,
     brands,
-    categories,
-    image
+    categories
   } = props;
 
   // Loading state to manage form submission
@@ -38,11 +39,9 @@ const AddProduct = (props) => {
     setSubmitting(true);
 
     try {
-      console.log('Submitting product');
-      await addProduct(); // Call addProduct function
-      console.log('Finished calling addProduct');
+      await addProduct();
     } catch (error) {
-      console.error('Error adding product:', error);
+      // Errors are surfaced through the redux notification system.
     } finally {
       setSubmitting(false); // Reset loading state
     }
@@ -146,15 +145,19 @@ const AddProduct = (props) => {
           <Col xs='12' md='12'>
             <Input
               type={'file'}
-              error={formErrors['file']}
+              error={formErrors['image']}
               name={'image'}
-              label={'file'}
-              placeholder={'Please Upload Image'}
-              value={image}
+              label={'Product image'}
+              accept={IMAGE_ACCEPT}
               onInputChange={(name, value) => {
                 productChange(name, value);
               }}
             />
+            {productFormData.image && productFormData.image.name && (
+              <small className='text-muted'>
+                Selected: {productFormData.image.name}
+              </small>
+            )}
           </Col>
           <Col xs='12' md='12' className='my-2'>
             <Switch

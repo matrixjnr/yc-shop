@@ -24,13 +24,16 @@ import {
   FETCH_PRODUCTS_SELECT,
   SET_PRODUCTS_LOADING,
   SET_ADVANCED_FILTERS,
-  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS, RESET_PRODUCTS
+  RESET_ADVANCED_FILTERS, FETCH_ALL_PRODUCTS, RESET_PRODUCTS, UPDATE_PRODUCT_IMAGE
 } from './constants';
 
 import { API_URL, ROLES } from '../../constants';
 import handleError from '../../utils/error';
 import { formatSelectOptions, unformatSelectOptions } from '../../utils/select';
 import { allFieldsValidation } from '../../utils/validation';
+
+const isSelectedFile = value =>
+  Boolean(value && typeof value === 'object' && value.name && value.size !== undefined);
 
 export const productChange = (name, value) => {
   let formData = {};
@@ -285,8 +288,6 @@ export const addProduct = () => {
       const brand = unformatSelectOptions([product.brand]);
       const category = unformatSelectOptions([product.category]);
 
-      console.log("Product adding inside actions.js");
-
       const newProduct = {
         // sku: product.sku,
         name: product.name,
@@ -328,11 +329,9 @@ export const addProduct = () => {
       });
 
       if (!isValid) {
-        console.log("Invalid product");
         return dispatch({ type: SET_PRODUCT_FORM_ERRORS, payload: errors });
       }
       const formData = new FormData();
-      console.log("New product", formData);
       if (newProduct.image) {
         for (const key in newProduct) {
           if (newProduct.hasOwnProperty(key)) {
@@ -350,7 +349,6 @@ export const addProduct = () => {
       const response = await axios.post(`${API_URL}/product/add`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
-      console.log("Finished response", response);
       const successfulOptions = {
         title: `${response.data.message}`,
         position: 'tr',
@@ -367,7 +365,58 @@ export const addProduct = () => {
         dispatch(goBack());
       }
     } catch (error) {
-      console.log("Error adding product");
+      handleError(error, dispatch);
+    }
+  };
+};
+
+// upload/replace a product image
+export const uploadProductImage = (id, file) => {
+  return async dispatch => {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    const response = await axios.put(
+      `${API_URL}/product/${id}/image`,
+      formData,
+      {headers: {'Content-Type': 'multipart/form-data'}}
+    );
+
+    if (response.data.success === true) {
+      dispatch({
+        type: UPDATE_PRODUCT_IMAGE,
+        payload: {
+          imageUrl: response.data.imageUrl,
+          imageKey: response.data.imageKey
+        }
+      });
+      // Clear the pending file so a later text-only save cannot re-upload it.
+      dispatch(productEditChange('image', null));
+    }
+
+    return response.data;
+  };
+};
+
+// remove a product image
+export const removeProductImage = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.delete(`${API_URL}/product/${id}/image`);
+
+      if (response.data.success === true) {
+        dispatch({
+          type: UPDATE_PRODUCT_IMAGE,
+          payload: {imageUrl: '', imageKey: ''}
+        });
+        dispatch(productEditChange('image', null));
+        dispatch(success({
+          title: response.data.message,
+          position: 'tr',
+          autoDismiss: 1
+        }));
+      }
+    } catch (error) {
       handleError(error, dispatch);
     }
   };
@@ -451,7 +500,10 @@ export const updateProduct = () => {
       if (response.data.success === true) {
         dispatch(success(successfulOptions));
 
-        //dispatch(goBack());
+        // Upload the replacement image only after the text fields are saved.
+        if (isSelectedFile(product.image)) {
+          await dispatch(uploadProductImage(product._id, product.image));
+        }
       }
     } catch (error) {
       handleError(error, dispatch);

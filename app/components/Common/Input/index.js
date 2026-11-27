@@ -18,6 +18,7 @@ const Input = props => {
     min,
     max,
     disabled,
+    accept,
     placeholder,
     rows,
     label,
@@ -121,14 +122,15 @@ const Input = props => {
         <div className='input-text-block'>
           <input
             className={'input-text'}
-            autoComplete={autoComplete}
+            autoComplete={type === 'file' ? undefined : autoComplete}
             type={type}
+            accept={type === 'file' ? accept : undefined}
             onChange={e => {
               _onChange(e);
             }}
             disabled={disabled}
             name={name}
-            value={value}
+            {...(type === 'file' ? {} : {value})}
             placeholder={placeholder}
           />
           {inlineElement}
